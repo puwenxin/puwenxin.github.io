@@ -6,15 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives: 2017/7 | 普忞忞的博客</title>
+  <title>工具和框架---IntelliJ、Maven和SSM | 普忞忞的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="普忞忞的博客">
-<meta property="og:url" content="http://yoursite.com/archives/2017/07/index.html">
+  <meta name="description" content="这个夏天快要结束了，最近做的项目也成功地上线，一直都想把这些过程记录下来。但是由于自己的懒惰，却迟迟不能行动起来。在有限的时间里多做点自己想做的事吧。 现在完成的这个项目是一个企业级的电商项目。今天主要介绍所使用的工具和框架。它们是IntelliJ，Maven和SSM框架。">
+<meta name="keywords" content="Web,Java,Spring">
+<meta property="og:type" content="article">
+<meta property="og:title" content="工具和框架---IntelliJ、Maven和SSM">
+<meta property="og:url" content="http://yoursite.com/2017/08/28/工具和框架-IntelliJ、Maven和SSM/index.html">
 <meta property="og:site_name" content="普忞忞的博客">
+<meta property="og:description" content="这个夏天快要结束了，最近做的项目也成功地上线，一直都想把这些过程记录下来。但是由于自己的懒惰，却迟迟不能行动起来。在有限的时间里多做点自己想做的事吧。 现在完成的这个项目是一个企业级的电商项目。今天主要介绍所使用的工具和框架。它们是IntelliJ，Maven和SSM框架。">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-08-30T02:48:21.709Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="普忞忞的博客">
+<meta name="twitter:title" content="工具和框架---IntelliJ、Maven和SSM">
+<meta name="twitter:description" content="这个夏天快要结束了，最近做的项目也成功地上线，一直都想把这些过程记录下来。但是由于自己的懒惰，却迟迟不能行动起来。在有限的时间里多做点自己想做的事吧。 现在完成的这个项目是一个企业级的电商项目。今天主要介绍所使用的工具和框架。它们是IntelliJ，Maven和SSM框架。">
   
     <link rel="alternative" href="/atom.xml" title="普忞忞的博客" type="application/atom+xml">
   
@@ -150,49 +155,183 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-工具和框架-IntelliJ、Maven和SSM" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/07/24/hello-world/" class="archive-article-date">
-  	<time datetime="2017-07-24T08:56:05.521Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-24</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/07/24/hello-world/">Hello World</a>
+    <h1 class="article-title" itemprop="name">
+      工具和框架---IntelliJ、Maven和SSM
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
+        
+        <a href="/2017/08/28/工具和框架-IntelliJ、Maven和SSM/" class="archive-article-date">
+  	<time datetime="2017-08-28T08:03:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-28</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>这个夏天快要结束了，最近做的项目也成功地上线，一直都想把这些过程记录下来。但是由于自己的懒惰，却迟迟不能行动起来。<br>在有限的时间里多做点自己想做的事吧。</p>
+<p>现在完成的这个项目是一个企业级的电商项目。今天主要介绍所使用的工具和框架。它们是IntelliJ，Maven和SSM框架。</p>
+<a id="more"></a>
+<p>##IntelliJ IDEA</p>
+<p>之前Java的IDE我用过eclipse，MyEclipse，NetBeans等，这次跟着同学一起使用了IntelliJ IDEA，（以下简称IDEA）发现这真的是一个特别智能特别好用的编辑器。<br>我们使用的版本是ULTIMATE2016.1。它的开发公司JetBrains是一家捷克的软件开发公司。对于IDEA，JetBrans公司提出的最新口号是：Capable and Ergomomic IDE for JVM ,<br>翻译过来就是面向JVM、功能强大且符合人体工程学的IDE。面向JVM的是指该IDE支持Java、Scale等运行于JVM之上的所有语言。</p>
+<p>IDEA在智能代码助手、代码自动提示、重构、J2EE支持、各类版本控制工具(git、svn、github等)、JUnit、CVS整合、代码分析、 创新的GUI设计等方面的功能是超强的。<br>我们在项目中使用的控制工具是svn，IDEA能够清晰地提示出每次版本提交之后代码更改的地方。也可以轻松地revert到update前的代码。它在编程中代码的自动提示等<br>非常高效，甚至可以让开发人员脱离鼠标。<br>此外它还可以集成各种各样的插件，完成各种所需要的功能和框架。不得不说是十分强大了。</p>
+<p>##项目构建管理工具–Maven</p>
+<p>普通的Java工程存在着需要手动下载Jar包、Jar包难于管理、没有统一的文件约束规范等问题。Maven却能很好地解决这些问题。<br>一般Maven项目构建的生命周期包括：清理-&gt;编译-&gt;测试-&gt;打包-&gt;集成测试-&gt;验证-&gt;部署。在Maven工程的pom.xml文件中有对整个项目的描述。<br>pom（Project Object Model）是Maven是核心配置文件。在其中添加一些属性，就能确定唯一的Jar包，并会自动下载和管理。插件的使用也是在这里定义，方法与<br>Jar包的声明类似。Maven通过groupId，artifactID，以及version确定一个唯一的Jar包，举例（插件也类似）：<br>    <dependency><br>          <groupid>org.mybatis</groupid><br>          <artifactid>mybatis-spring</artifactid><br>          <version>1.2.2</version><br>    </dependency><br>    <plugin><br>            <groupid>org.apache.maven.plugins</groupid><br>            <artifactid>maven-compiler-plugin</artifactid><br>            <configuration><br>              <source>1.6<br>              <target>1.6</target><br>            </configuration><br>    </plugin><br>Maven在执行相关的任务时，首先会从本地仓库中获取jar包，如果有的话，判断版本是否正确，如果一切都没问题则直接使用；<br>当无法获取指定jar包时，本地仓库会从远程仓库下载jar包，并放入本地仓库以备将来使用。找不到则会给出相关的提示。<br>Maven在本地如果搭建了私库时，则会去私库中查找，找到就拷贝到本地仓库；找不到就会去共享仓库中查找，然后放入私库和本地库。私库可以让<br>局域网内的开发者可以共享依赖，就不用每个人都去外网下载jar包，造成带宽浪费。<br>Maven管理生命周期的方式也是非常的便捷，可以自己用命令去执行，也可以完全让它自己进行。</p>
+<p>##SSM</p>
+<p>为了配置SSM框架，我们需要配置spring-mybatis.xml,spring-MVC.xml等文件。以及log4j.properties,jdbc.properties等资源文件。<br>spring-mybatis里面的配置主要就是自动扫描，自动注入，数据库的配置等等。此时我们可以使用Mybatis Generator来自动创建实体类、<br>映射文件、DAO接口文件。也就是通常看到的.xml文件，.mapper文件，和实体类文件。这是一个非常重要的应用，它的自动化省去了程序猿<br>大量的工作。只需要点击generate启动插件，这些文件全部自动生成。<br>spring-MVC.xml的配置里主要就是控制器的自动扫描，视图模式，注解的启动等。<br>最后还要在web.xml里引入我们刚刚所做的配置，以及配置filter，listener，servlet。框架配置好之后，就可以开始书写我们的Controller<br>和Service，再部署到Tomcat。举例：<br>    <servlet><br>    <servlet-name>SpringMVC</servlet-name><br>    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class><br>    <init-param><br>      <param-name>contextConfigLocation</param-name><br>      <param-value>classpath:spring-mvc.xml</param-value><br>    </init-param><br>    <load-on-startup>1</load-on-startup><br>    <async-supported>true</async-supported><br>    </servlet></p>
+<p>完。</p>
 
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Web</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Spring</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2017/08/28/工具和框架-IntelliJ、Maven和SSM/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2017/07/24/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Hello World</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+
+  
 
 
           </div>
@@ -215,8 +354,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: true,
