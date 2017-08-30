@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="普忞忞的博客">
 <meta property="og:description" content="这个夏天快要结束了，最近做的项目也成功地上线，一直都想把这些过程记录下来。但是由于自己的懒惰，却迟迟不能行动起来。在有限的时间里多做点自己想做的事吧。 现在完成的这个项目是一个企业级的电商项目。今天主要介绍所使用的工具和框架。它们是IntelliJ，Maven和SSM框架。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-08-30T02:48:21.709Z">
+<meta property="og:updated_time" content="2017-08-30T02:59:15.859Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="工具和框架---IntelliJ、Maven和SSM">
 <meta name="twitter:description" content="这个夏天快要结束了，最近做的项目也成功地上线，一直都想把这些过程记录下来。但是由于自己的懒惰，却迟迟不能行动起来。在有限的时间里多做点自己想做的事吧。 现在完成的这个项目是一个企业级的电商项目。今天主要介绍所使用的工具和框架。它们是IntelliJ，Maven和SSM框架。">
@@ -178,14 +178,35 @@
         <p>这个夏天快要结束了，最近做的项目也成功地上线，一直都想把这些过程记录下来。但是由于自己的懒惰，却迟迟不能行动起来。<br>在有限的时间里多做点自己想做的事吧。</p>
 <p>现在完成的这个项目是一个企业级的电商项目。今天主要介绍所使用的工具和框架。它们是IntelliJ，Maven和SSM框架。</p>
 <a id="more"></a>
-<p>##IntelliJ IDEA</p>
-<p>之前Java的IDE我用过eclipse，MyEclipse，NetBeans等，这次跟着同学一起使用了IntelliJ IDEA，（以下简称IDEA）发现这真的是一个特别智能特别好用的编辑器。<br>我们使用的版本是ULTIMATE2016.1。它的开发公司JetBrains是一家捷克的软件开发公司。对于IDEA，JetBrans公司提出的最新口号是：Capable and Ergomomic IDE for JVM ,<br>翻译过来就是面向JVM、功能强大且符合人体工程学的IDE。面向JVM的是指该IDE支持Java、Scale等运行于JVM之上的所有语言。</p>
+<h2 id="IntelliJ-IDEA"><a href="#IntelliJ-IDEA" class="headerlink" title="IntelliJ IDEA"></a>IntelliJ IDEA</h2><p>之前Java的IDE我用过eclipse，MyEclipse，NetBeans等，这次跟着同学一起使用了IntelliJ IDEA，（以下简称IDEA）发现这真的是一个特别智能特别好用的编辑器。<br>我们使用的版本是ULTIMATE2016.1。它的开发公司JetBrains是一家捷克的软件开发公司。对于IDEA，JetBrans公司提出的最新口号是：Capable and Ergomomic IDE for JVM ,<br>翻译过来就是面向JVM、功能强大且符合人体工程学的IDE。面向JVM的是指该IDE支持Java、Scale等运行于JVM之上的所有语言。</p>
 <p>IDEA在智能代码助手、代码自动提示、重构、J2EE支持、各类版本控制工具(git、svn、github等)、JUnit、CVS整合、代码分析、 创新的GUI设计等方面的功能是超强的。<br>我们在项目中使用的控制工具是svn，IDEA能够清晰地提示出每次版本提交之后代码更改的地方。也可以轻松地revert到update前的代码。它在编程中代码的自动提示等<br>非常高效，甚至可以让开发人员脱离鼠标。<br>此外它还可以集成各种各样的插件，完成各种所需要的功能和框架。不得不说是十分强大了。</p>
-<p>##项目构建管理工具–Maven</p>
-<p>普通的Java工程存在着需要手动下载Jar包、Jar包难于管理、没有统一的文件约束规范等问题。Maven却能很好地解决这些问题。<br>一般Maven项目构建的生命周期包括：清理-&gt;编译-&gt;测试-&gt;打包-&gt;集成测试-&gt;验证-&gt;部署。在Maven工程的pom.xml文件中有对整个项目的描述。<br>pom（Project Object Model）是Maven是核心配置文件。在其中添加一些属性，就能确定唯一的Jar包，并会自动下载和管理。插件的使用也是在这里定义，方法与<br>Jar包的声明类似。Maven通过groupId，artifactID，以及version确定一个唯一的Jar包，举例（插件也类似）：<br>    <dependency><br>          <groupid>org.mybatis</groupid><br>          <artifactid>mybatis-spring</artifactid><br>          <version>1.2.2</version><br>    </dependency><br>    <plugin><br>            <groupid>org.apache.maven.plugins</groupid><br>            <artifactid>maven-compiler-plugin</artifactid><br>            <configuration><br>              <source>1.6<br>              <target>1.6</target><br>            </configuration><br>    </plugin><br>Maven在执行相关的任务时，首先会从本地仓库中获取jar包，如果有的话，判断版本是否正确，如果一切都没问题则直接使用；<br>当无法获取指定jar包时，本地仓库会从远程仓库下载jar包，并放入本地仓库以备将来使用。找不到则会给出相关的提示。<br>Maven在本地如果搭建了私库时，则会去私库中查找，找到就拷贝到本地仓库；找不到就会去共享仓库中查找，然后放入私库和本地库。私库可以让<br>局域网内的开发者可以共享依赖，就不用每个人都去外网下载jar包，造成带宽浪费。<br>Maven管理生命周期的方式也是非常的便捷，可以自己用命令去执行，也可以完全让它自己进行。</p>
-<p>##SSM</p>
-<p>为了配置SSM框架，我们需要配置spring-mybatis.xml,spring-MVC.xml等文件。以及log4j.properties,jdbc.properties等资源文件。<br>spring-mybatis里面的配置主要就是自动扫描，自动注入，数据库的配置等等。此时我们可以使用Mybatis Generator来自动创建实体类、<br>映射文件、DAO接口文件。也就是通常看到的.xml文件，.mapper文件，和实体类文件。这是一个非常重要的应用，它的自动化省去了程序猿<br>大量的工作。只需要点击generate启动插件，这些文件全部自动生成。<br>spring-MVC.xml的配置里主要就是控制器的自动扫描，视图模式，注解的启动等。<br>最后还要在web.xml里引入我们刚刚所做的配置，以及配置filter，listener，servlet。框架配置好之后，就可以开始书写我们的Controller<br>和Service，再部署到Tomcat。举例：<br>    <servlet><br>    <servlet-name>SpringMVC</servlet-name><br>    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class><br>    <init-param><br>      <param-name>contextConfigLocation</param-name><br>      <param-value>classpath:spring-mvc.xml</param-value><br>    </init-param><br>    <load-on-startup>1</load-on-startup><br>    <async-supported>true</async-supported><br>    </servlet></p>
-<p>完。</p>
+<h2 id="项目构建管理工具–Maven"><a href="#项目构建管理工具–Maven" class="headerlink" title="项目构建管理工具–Maven"></a>项目构建管理工具–Maven</h2><p>普通的Java工程存在着需要手动下载Jar包、Jar包难于管理、没有统一的文件约束规范等问题。Maven却能很好地解决这些问题。<br>一般Maven项目构建的生命周期包括：清理-&gt;编译-&gt;测试-&gt;打包-&gt;集成测试-&gt;验证-&gt;部署。在Maven工程的pom.xml文件中有对整个项目的描述。<br>pom（Project Object Model）是Maven是核心配置文件。在其中添加一些属性，就能确定唯一的Jar包，并会自动下载和管理。插件的使用也是在这里定义，方法与<br>Jar包的声明类似。Maven通过groupId，artifactID，以及version确定一个唯一的Jar包，举例（插件也类似）：</p>
+<pre><code>&lt;dependency&gt;
+      &lt;groupId&gt;org.mybatis&lt;/groupId&gt;
+      &lt;artifactId&gt;mybatis-spring&lt;/artifactId&gt;
+      &lt;version&gt;1.2.2&lt;/version&gt;
+&lt;/dependency&gt;
+&lt;plugin&gt;
+        &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
+        &lt;artifactId&gt;maven-compiler-plugin&lt;/artifactId&gt;
+        &lt;configuration&gt;
+          &lt;source&gt;1.6&lt;/source&gt;
+          &lt;target&gt;1.6&lt;/target&gt;
+        &lt;/configuration&gt;
+&lt;/plugin&gt;
+</code></pre><p>Maven在执行相关的任务时，首先会从本地仓库中获取jar包，如果有的话，判断版本是否正确，如果一切都没问题则直接使用；<br>当无法获取指定jar包时，本地仓库会从远程仓库下载jar包，并放入本地仓库以备将来使用。找不到则会给出相关的提示。<br>Maven在本地如果搭建了私库时，则会去私库中查找，找到就拷贝到本地仓库；找不到就会去共享仓库中查找，然后放入私库和本地库。私库可以让<br>局域网内的开发者可以共享依赖，就不用每个人都去外网下载jar包，造成带宽浪费。<br>Maven管理生命周期的方式也是非常的便捷，可以自己用命令去执行，也可以完全让它自己进行。</p>
+<h2 id="SSM"><a href="#SSM" class="headerlink" title="SSM"></a>SSM</h2><p>为了配置SSM框架，我们需要配置spring-mybatis.xml,spring-MVC.xml等文件。以及log4j.properties,jdbc.properties等资源文件。<br>spring-mybatis里面的配置主要就是自动扫描，自动注入，数据库的配置等等。此时我们可以使用Mybatis Generator来自动创建实体类、<br>映射文件、DAO接口文件。也就是通常看到的.xml文件，.mapper文件，和实体类文件。这是一个非常重要的应用，它的自动化省去了程序猿<br>大量的工作。只需要点击generate启动插件，这些文件全部自动生成。<br>spring-MVC.xml的配置里主要就是控制器的自动扫描，视图模式，注解的启动等。<br>最后还要在web.xml里引入我们刚刚所做的配置，以及配置filter，listener，servlet。框架配置好之后，就可以开始书写我们的Controller<br>和Service，再部署到Tomcat。举例：</p>
+<pre><code>&lt;servlet&gt;
+&lt;servlet-name&gt;SpringMVC&lt;/servlet-name&gt;
+&lt;servlet-class&gt;org.springframework.web.servlet.DispatcherServlet&lt;/servlet-class&gt;
+&lt;init-param&gt;
+  &lt;param-name&gt;contextConfigLocation&lt;/param-name&gt;
+  &lt;param-value&gt;classpath:spring-mvc.xml&lt;/param-value&gt;
+&lt;/init-param&gt;
+&lt;load-on-startup&gt;1&lt;/load-on-startup&gt;
+&lt;async-supported&gt;true&lt;/async-supported&gt;
+&lt;/servlet&gt;
+</code></pre><p>完。</p>
 
       
 
