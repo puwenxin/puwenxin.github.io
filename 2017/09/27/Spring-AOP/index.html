@@ -6,15 +6,27 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives: 2017/7 | 普忞忞的博客</title>
+  <title>Spring AOP | 普忞忞的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="普忞忞的博客">
-<meta property="og:url" content="http://yoursite.com/archives/2017/07/index.html">
+  <meta name="description" content="AOP（Aspect Oriented Programming）背景AOP可以说是OOP（Object Oriented Programming，面向对象编程）的补充和完善。OOP引入封装、继承、多态等概念来建立一种对象层次结构，用于模拟公共行为的一个集合。OOP允许开发者定义纵向的关系，但并不适合定义横向的关系，例如日志功能。日志代码往往横向地散布在所有对象层次中，而与它对应的对象的核心功能毫无">
+<meta name="keywords" content="Java,Web,Spring">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spring AOP">
+<meta property="og:url" content="http://yoursite.com/2017/09/27/Spring-AOP/index.html">
 <meta property="og:site_name" content="普忞忞的博客">
+<meta property="og:description" content="AOP（Aspect Oriented Programming）背景AOP可以说是OOP（Object Oriented Programming，面向对象编程）的补充和完善。OOP引入封装、继承、多态等概念来建立一种对象层次结构，用于模拟公共行为的一个集合。OOP允许开发者定义纵向的关系，但并不适合定义横向的关系，例如日志功能。日志代码往往横向地散布在所有对象层次中，而与它对应的对象的核心功能毫无">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/assets/blogImage/TIM截图20170927150041.png">
+<meta property="og:image" content="http://yoursite.com/assets/blogImage/TIM截图20170927150056.png">
+<meta property="og:image" content="http://yoursite.com/assets/blogImage/man.png">
+<meta property="og:image" content="http://yoursite.com/assets/blogImage/代码1.png">
+<meta property="og:image" content="http://yoursite.com/assets/blogImage/代码2.png">
+<meta property="og:image" content="http://yoursite.com/assets/blogImage/代码3.png">
+<meta property="og:updated_time" content="2017-09-27T07:28:14.177Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="普忞忞的博客">
+<meta name="twitter:title" content="Spring AOP">
+<meta name="twitter:description" content="AOP（Aspect Oriented Programming）背景AOP可以说是OOP（Object Oriented Programming，面向对象编程）的补充和完善。OOP引入封装、继承、多态等概念来建立一种对象层次结构，用于模拟公共行为的一个集合。OOP允许开发者定义纵向的关系，但并不适合定义横向的关系，例如日志功能。日志代码往往横向地散布在所有对象层次中，而与它对应的对象的核心功能毫无">
+<meta name="twitter:image" content="http://yoursite.com/assets/blogImage/TIM截图20170927150041.png">
   
     <link rel="alternative" href="/atom.xml" title="普忞忞的博客" type="application/atom+xml">
   
@@ -150,49 +162,188 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-Spring-AOP" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/07/24/hello-world/" class="archive-article-date">
-  	<time datetime="2017-07-24T08:56:05.521Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-24</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/07/24/hello-world/">Hello World</a>
+    <h1 class="article-title" itemprop="name">
+      Spring AOP
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
+        
+        <a href="/2017/09/27/Spring-AOP/" class="archive-article-date">
+  	<time datetime="2017-09-27T03:05:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-27</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="AOP（Aspect-Oriented-Programming）背景"><a href="#AOP（Aspect-Oriented-Programming）背景" class="headerlink" title="AOP（Aspect Oriented Programming）背景"></a>AOP（Aspect Oriented Programming）背景</h2><p>AOP可以说是OOP（Object Oriented Programming，面向对象编程）的补充和完善。OOP引入封装、继承、多态等概念来建立一种对象层次结构，用于模拟公共行为的一个集合。<br>OOP允许开发者定义纵向的关系，但并不适合定义横向的关系，例如日志功能。日志代码往往横向地散布在所有对象层次中，而与它对应的对象的核心功能毫无关系。<br>对于其他类型的代码，如安全性、异常处理也都是如此，这种散布在各处的无关的代码被称为横切（cross cutting），在OOP设计中，它导致了大量代码的重复，而不利于各个模块的重用。<br>AOP技术恰恰相反，它利用一种称为”横切”的技术，剖解开封装的对象内部，并将那些影响了多个类的公共行为封装到一个可重用模块，并将其命名为”Aspect”，即切面。</p>
+<a id="more"></a>
+<p>所谓”切面”，简单说就是那些与业务无关，却为业务模块所共同调用的逻辑或责任封装起来，便于减少系统的重复代码，降低模块之间的耦合度。<br>使用”横切”技术，AOP把软件系统分为两个部分：核心关注点和横切关注点。业务处理的主要流程是核心关注点，与之关系不大的是横切关注点。<br>AOP的作用在于分离系统中的各种关注点，将核心关注点和横切关注点分离开来。</p>
+<h2 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h2><p>在OOP 中, 我们以class(类)作为我们的基本单元, 而 AOP 中的基本单元是 Aspect(切面)。<br>以下两图简单地示意了他们不同的运作方式。<br><img src="/assets/blogImage/TIM截图20170927150041.png" alt=""><br><img src="/assets/blogImage/TIM截图20170927150056.png" alt=""></p>
+<h2 id="术语"><a href="#术语" class="headerlink" title="术语"></a>术语</h2><p>AOP概念之所以理解起来有些复杂，是因为它术语比较多，从英文翻译过来又各有不一，所以产生了很大的干扰。</p>
+<h4 id="切面（Aspect）"><a href="#切面（Aspect）" class="headerlink" title="切面（Aspect）"></a>切面（Aspect）</h4><p>可以简单地认为, 使用 @Aspect 注解的类就是切面。类是对物体特征的抽象，切面就是对横切关注点的抽象。</p>
+<h4 id="连接点（join-point）"><a href="#连接点（join-point）" class="headerlink" title="连接点（join point）"></a>连接点（join point）</h4><p>被拦截到的点，因为Spring只支持方法类型的连接点，所以在Spring中连接点指的就是被拦截到的方法。拦截作用的范围。</p>
+<h4 id="切入点（point-cut）"><a href="#切入点（point-cut）" class="headerlink" title="切入点（point cut）"></a>切入点（point cut）</h4><p>对连接点进行拦截的定义。描述拦截怎样的方法。</p>
+<h4 id="通知（advice）"><a href="#通知（advice）" class="headerlink" title="通知（advice）"></a>通知（advice）</h4><p>所谓通知指的就是指拦截到连接点之后要执行的代码，通知分为前置、后置、异常、最终、环绕通知五类。</p>
+<h4 id="point-cut和join-point的区别"><a href="#point-cut和join-point的区别" class="headerlink" title="point cut和join point的区别"></a>point cut和join point的区别</h4><p>在 Spring AOP 中, 所有的方法执行都是 join point。 而 point cut 是一个描述信息, 它修饰的是 join point, 通过 point cut,<br>我们就可以确定哪些 join point 可以被织入 advice。因此 join point 和 point cut 本质上就是两个不同纬度上的东西。<br>advice 是在 join point 上执行的, 而 point cut 规定了哪些 join point 可以执行哪些 advice。</p>
+<h2 id="术语之间关系举例"><a href="#术语之间关系举例" class="headerlink" title="术语之间关系举例"></a>术语之间关系举例</h2><p>下面我以一个简单的例子来比喻一下 AOP 中 aspect, jointpoint, pointcut 与 advice 之间的关系。这是我从网上看到的一个例子，<br>作者的举例非常生动具体。</p>
+<p>让我们来假设一下, 从前有一个叫爪哇的小县城, 在一个月黑风高的晚上, 这个县城中发生了命案. 作案的凶手十分狡猾,<br>现场没有留下什么有价值的线索. 不过万幸的是, 刚从隔壁回来的老王恰好在这时候无意中发现了凶手行凶的过程, 但是由于天色已晚,<br>加上凶手蒙着面, 老王并没有看清凶手的面目, 只知道凶手是个男性, 身高约七尺五寸. 爪哇县的县令根据老王的描述,<br>对守门的士兵下命令说: 凡是发现有身高七尺五寸的男性, 都要抓过来审问. 士兵当然不敢违背县令的命令,<br>只好把进出城的所有符合条件的人都抓了起来.<br><img src="/assets/blogImage/man.png" alt=""><br>来让我们看一下上面的一个小故事和 AOP 到底有什么对应关系.<br>首先我们知道, 在 Spring AOP 中 join point 指代的是所有方法的执行点, 而 point cut 是一个描述信息, 它修饰的是 join point,<br>通过 point cut, 我们就可以确定哪些 join point 可以被织入 Advice. 对应到我们在上面举的例子, 我们可以做一个简单的类比,<br>join point 就相当于 爪哇的小县城里的百姓, point cut 就相当于 老王所做的指控, 即凶手是个男性, 身高约七尺五寸,<br>而 advice 则是施加在符合老王所描述的嫌疑人的动作: 抓过来审问。<br>aspect: aspect 是 point cut 与 advice 的组合, 因此在这里我们就可以类比: “根据老王的线索, 凡是发现有身高七尺五寸的男性, 都要抓过来审问”<br>这一整个动作可以被认为是一个 aspect.</p>
+<p>为什么可以这样类比呢?</p>
+<p>join point –&gt; 爪哇的小县城里的百姓: 因为根据定义, join point 是所有可能被织入 advice 的候选的点, 在 Spring AOP中,<br>则可以认为所有方法执行点都是 join point. 而在我们上面的例子中, 命案发生在小县城中, 按理说在此县城中的所有人都有可能是嫌疑人。</p>
+<h2 id="实例：方法耗时统计"><a href="#实例：方法耗时统计" class="headerlink" title="实例：方法耗时统计"></a>实例：方法耗时统计</h2><p>需求：为服务中的每个方法调用进行调用耗时记录。<br>方法：使用 环绕型advice, 然后在方法调用前, 记录一下开始时间, 然后在方法调用结束后, 记录结束时间, 它们的时间差就是方法的调用耗时。<br><img src="/assets/blogImage/代码1.png" alt=""><br><img src="/assets/blogImage/代码2.png" alt=""><br>aspect 一开始定义了一个 pointcut, 匹配 SomeService 类下的所有的方法.<br>接着呢, 定义了一个 around advice。<br>advice 中的代码也很简单, 它使用了 Spring 提供的 StopWatch 来统计一段代码的执行时间. 首先我们先调用 stopWatch.start() 开始计时,<br>然后通过 pjp.proceed() 来调用我们实际的服务方法, 当调用结束后, 通过 stopWatch.stop() 来结束计时.</p>
+<p>接着我们来写一个简单的服务, 这个服务提供一个 someMethod 方法用于模拟一个耗时的方法调用:<br><img src="/assets/blogImage/代码3.png" alt=""><br>这样当 SomeService 类下的方法调用时, 我们所提供的 advice 就会被执行, 因此就可以自动地为我们统计此方法的调用耗时, 并自动上报到监控系统中了.<br>这里仅仅使用了寥寥数语就把一个需求完美地解决了, 并且还与原来的业务逻辑完全解耦, 扩展及其方便.</p>
 
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Web</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Spring</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2017/09/27/Spring-AOP/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2017/09/08/Java-Web之-拦截器的使用/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Java Web之----拦截器的使用</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+
+  
 
 
           </div>
@@ -215,8 +366,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: true,
