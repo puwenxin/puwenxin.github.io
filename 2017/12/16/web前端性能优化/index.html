@@ -6,15 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives: 2017/7 | 普忞忞的博客</title>
+  <title>web前端性能优化 | 普忞忞的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="普忞忞的博客">
-<meta property="og:url" content="http://yoursite.com/archives/2017/07/index.html">
+  <meta name="description" content="最近又是返回到web端的开发中，技术上自己比较懒惰，没有主动学习到一些新东西，主要精力还是在解决实际的业务问题和算法问题中。不过接下来一定还是要学习一些新的东西。今天总结一点web前端的优化，旨在提升用户体验。">
+<meta name="keywords" content="Web,javaScript,前端">
+<meta property="og:type" content="article">
+<meta property="og:title" content="web前端性能优化">
+<meta property="og:url" content="http://yoursite.com/2017/12/16/web前端性能优化/index.html">
 <meta property="og:site_name" content="普忞忞的博客">
+<meta property="og:description" content="最近又是返回到web端的开发中，技术上自己比较懒惰，没有主动学习到一些新东西，主要精力还是在解决实际的业务问题和算法问题中。不过接下来一定还是要学习一些新的东西。今天总结一点web前端的优化，旨在提升用户体验。">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-12-16T11:45:14.421Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="普忞忞的博客">
+<meta name="twitter:title" content="web前端性能优化">
+<meta name="twitter:description" content="最近又是返回到web端的开发中，技术上自己比较懒惰，没有主动学习到一些新东西，主要精力还是在解决实际的业务问题和算法问题中。不过接下来一定还是要学习一些新的东西。今天总结一点web前端的优化，旨在提升用户体验。">
   
     <link rel="alternative" href="/atom.xml" title="普忞忞的博客" type="application/atom+xml">
   
@@ -150,49 +155,181 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-web前端性能优化" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/07/24/hello-world/" class="archive-article-date">
-  	<time datetime="2017-07-24T08:56:05.521Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-24</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/07/24/hello-world/">Hello World</a>
+    <h1 class="article-title" itemprop="name">
+      web前端性能优化
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
+        
+        <a href="/2017/12/16/web前端性能优化/" class="archive-article-date">
+  	<time datetime="2017-12-16T10:55:51.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-16</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>最近又是返回到web端的开发中，技术上自己比较懒惰，没有主动学习到一些新东西，主要精力还是在解决实际的业务问题和算法问题中。<br>不过接下来一定还是要学习一些新的东西。今天总结一点web前端的优化，旨在提升用户体验。</p>
+<a id="more"></a>
+<h2 id="网页端"><a href="#网页端" class="headerlink" title="网页端"></a>网页端</h2><p>· 减少http请求，合理设置缓存。<br>     合并CSS，合并javascript，合并图片。（捆绑文件，CSS Sprites， Image Maps，YUI Compressor）<br>    HTTP缓存，浏览器缓存。<br>· 引用外部CSS和JS文件，CSS放头，JS放尾。<br>· 减少Reflow。<br>    Reflow与Repaint。<br>· 同步加载、异步加载、按需加载。<br>CSS Sprites: 就是把多个图片拼成一副图片，然后通过CSS来控制在什么地方具体显示这整张图片的什么位置。<br>Image Maps： 也是将多幅图拼在一起，然后通过坐标来控制显示导航。<br>yui-compress能将删除 全部 的 注释、 换行和 多余的 空白字符 ，并且将中间变量简化为单个字符 ，从而大大的减少js和css文件的体积。<br>将页面的资源文件压缩在一个文件中，从而减少页面的请求次数，也减少了服务器的压力和提高了页面的相应速度，是页面的优化的一项重要的措施。</p>
+<h2 id="服务端"><a href="#服务端" class="headerlink" title="服务端"></a>服务端</h2><p>· 接口复用<br>· UI模块复用<br>· CDN加速</p>
+<h2 id="BigPipe"><a href="#BigPipe" class="headerlink" title="BigPipe"></a>BigPipe</h2><p>· 页面传统交互模式<br>   浏览器发请求-&gt;服务器解析-&gt;客户端响应-&gt;构建DOM  tree-&gt;下载CSS等资源<br>   缺点：每个步骤不可重叠，服务端或者客户端可能在等待。<br>· BigPipe工作方式<br>   为了能让一个页面能够同时被客户端和服务前端处理，首先将一个完成的页面划分为若干小块，这些小分块被称为 pagelets。 然后通过bigpipe技术，<br>   让页面以pagelet的形式在服务前端生成并 分块发送给客户端。</p>
+<p>重点：占位符与后台内容的结合</p>
+<p>一个 pagelet 包含了 id 、 HTML片段 、 依赖的CSS 、JavaScript 资源。<br>在客户端，当接收到一个pagelet(此时服务端还在继续生成其它pagelet) 的时候,马上回执行 onPageletArrive 的方法，BigPipe库会根据返回的pagelet信息 立即开始下载CSS资源，下载完之后会在页面显示pagelet片段。<br>由于JavaScript的下载和执行会阻塞页面的渲染，所以，JavaScript 下载和执行的优先级会被降低，等待所有 pagelet 全部被展示完了，JavaScript资源才会被开始下载和执行。</p>
+<p>重复上面的步骤，直到 pagelet 全部处理完毕，这个流程就结束了，pagelet 处理的过程服务器端和客户端一直保持 同步工作状态。</p>
+<p>缺点：<br>·  异步请求较多，不适应网络环境不好的情况。<br>·  SEO引擎较难抓取。<br>·  模块之间的通信问题。<br>·  模块引擎重复渲染。</p>
 
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Web</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">javaScript</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">前端</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2017/12/16/web前端性能优化/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2017/11/10/Android service/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Android service</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+
+  
 
 
           </div>
@@ -215,8 +352,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: true,
