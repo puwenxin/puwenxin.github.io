@@ -6,15 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Tag: Android | 普忞忞的博客</title>
+  <title>Android service | 普忞忞的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="普忞忞的博客">
-<meta property="og:url" content="http://yoursite.com/tags/Android/index.html">
+  <meta name="description" content="继续是Android。。。">
+<meta name="keywords" content="Android,Java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android service">
+<meta property="og:url" content="http://yoursite.com/2017/11/10/Android service/index.html">
 <meta property="og:site_name" content="普忞忞的博客">
+<meta property="og:description" content="继续是Android。。。">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-12-16T10:51:29.682Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="普忞忞的博客">
+<meta name="twitter:title" content="Android service">
+<meta name="twitter:description" content="继续是Android。。。">
   
     <link rel="alternative" href="/atom.xml" title="普忞忞的博客" type="application/atom+xml">
   
@@ -150,36 +155,63 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-Android service" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
   
+    <h1 class="article-title" itemprop="name">
+      Android service
+    </h1>
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/11/10/Android service/" class="archive-article-date">
+
+        
+        <a href="/2017/11/10/Android service/" class="archive-article-date">
   	<time datetime="2017-11-10T09:38:30.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-10</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/11/10/Android service/">Android service</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>继续是Android。。。</p>
+<a id="more"></a>
+<h2 id="service基本特点"><a href="#service基本特点" class="headerlink" title="service基本特点"></a>service基本特点</h2><p>四大组件之一，非常重要。<br>1.实现程序后台运行（复杂计算、下载等）<br>2.不依赖用户界面<br>3.一般是长生命周期<br>4.依赖于应用程序进程。</p>
+<p>举例就不贴图了，主要就是要继承Service类，重写onStartCommand()等方法。重要方法有startService，stopService，bndService，unbndService等。<br>这几个封装的函数背后的代码看了下但是没有记住，过程略长。</p>
+<h2 id="与Thread的区别"><a href="#与Thread的区别" class="headerlink" title="与Thread的区别"></a>与Thread的区别</h2><p>之所以有不少人会把它们联系起来，主要就是因为Service的后台概念。Thread开启一个子线程，在这里去执行一些耗时操作就不会阻塞主线程的运行。<br>而Service我们最初理解的时候，总会觉得它是用来处理一些后台任务的，一些比较耗时的操作也可以放在这里运行，这就会让人产生混淆了。但是，Service其实是运行在主线程里的。<br>不要把后台和子线程联系在一起，这是两个完全不同的概念。Android的后台就是指，它的运行是完全不依赖UI的。<br>即使Activity被销毁，或者程序被关闭，只要进程还在，Service就可以继续运行。比如说一些应用程序，始终需要与服务器之间始终保持着心跳连接，<br>就可以使用Service来实现。一直执行着心跳连接，也会阻塞主线程的运行，但是我们可以在Service中再创建一个子线程，然后在这里去处理耗时逻辑就没问题了。<br>既然在Service里也要创建一个子线程，那为什么不直接在Activity里创建呢？<br>这是因为Activity很难对Thread进行控制，当Activity被销毁之后，<br>就没有任何其它的办法可以再重新获取到之前创建的子线程的实例。而且在一个Activity中创建的子线程，另一个Activity无法对其进行操作。但是Service就不同了，<br>所有的Activity都可以与Service进行关联，然后可以很方便地操作其中的方法，即使Activity被销毁了，之后只要重新与Service建立关联，<br>就又能够获取到原有的Service中Binder的实例。因此，使用Service来处理后台任务，Activity就可以放心地finish，完全不需要担心无法对后台任务进行控制的情况。</p>
+<h2 id="远程service"><a href="#远程service" class="headerlink" title="远程service"></a>远程service</h2><p>为什么将MyService转换成远程Service后就不会导致程序ANR了呢？这是由于，使用了远程Service后，MyService已经在另外一个进程当中运行了，所以只会阻塞该进程中的主线程，并不会影响到当前的应用程序。<br>不过远程Service非但不好用，甚至可以称得上是较为难用。<br>弊端举例：首先将MyService的onCreate()方法中让线程睡眠的代码去除掉，然后重新运行程序，并点击一下Bind Service按钮，发现程序崩溃。<br>这是由于在Bind Service按钮的点击事件里面我们会让MainActivity和MyService建立关联，但是目前MyService已经是一个远程Service了，<br>Activity和Service运行在两个不同的进程当中，这时就不能再使用传统的建立关联的方式，程序也就崩溃了。</p>
+<p>如何才能让Activity与一个远程Service建立关联？这就要使用AIDL来进行跨进程通信了（IPC）。</p>
+<p>AIDL（Android Interface Definition Language）是Android接口定义语言的意思，它可以用于让某个Service与多个应用程序组件之间进行跨进程通信，从而可以实现多个应用程序共享同一个Service的功能。<br>具体我还并没有去实现，待后续研究。</p>
 
-        <div class="article-info info-on-right">
-          
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -195,61 +227,104 @@
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2017/11/10/Android service/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/10/24/Android中异步通信机制/" class="archive-article-date">
-  	<time datetime="2017-10-24T07:17:55.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-24</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2017/10/24/Android中异步通信机制/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Android中异步通信机制</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/10/24/Android中异步通信机制/">Android中异步通信机制</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Android</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
   
 
-    
+  
 
 
           </div>
@@ -272,9 +347,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: true,
 		toc_hide_index: true,
