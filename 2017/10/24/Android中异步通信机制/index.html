@@ -21,7 +21,7 @@
 <meta property="og:image" content="http://yoursite.com/assets/blogImage/message1.png">
 <meta property="og:image" content="http://yoursite.com/assets/blogImage/runnable.png">
 <meta property="og:image" content="http://yoursite.com/assets/blogImage/runnable1.png">
-<meta property="og:updated_time" content="2017-12-16T09:19:54.749Z">
+<meta property="og:updated_time" content="2017-12-16T09:29:48.334Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android中异步通信机制">
 <meta name="twitter:description" content="这篇其实是十月下旬写的，但是居然忘了发出去。。。。。——————以下是原文———————最近在老师的逼迫下，又开始了一个安卓项目。之前没做过安卓，但是项目急迫又缺人手，只好速成了。我们主要使用OkHttp进行网络通信，编写好前台和安卓控制代码，后台处理直接交给Spring的服务端。主要要注意Android和Spring一些数据解析格式的不同，然后编写好Activity。总体来说不算太难。今天写的异">
@@ -183,13 +183,11 @@
       
         <p>这篇其实是十月下旬写的，但是居然忘了发出去。。。。。<br>——————以下是原文———————<br>最近在老师的逼迫下，又开始了一个安卓项目。之前没做过安卓，但是项目急迫又缺人手，只好速成了。<br>我们主要使用OkHttp进行网络通信，编写好前台和安卓控制代码，后台处理直接交给Spring的服务端。主要要注意Android和Spring一些数据解析格式的不同，<br>然后编写好Activity。总体来说不算太难。<br>今天写的异步通信机制，我主要了解了一下Handler。记录一下。</p>
 <a id="more"></a>
-<h2 id="Handler机制产生背景"><a href="#Handler机制产生背景" class="headerlink" title="Handler机制产生背景"></a>Handler机制产生背景</h2><p>一个安卓程序的运行，就是一个进程的在执行，一个进程里面可以拥有很多个线程。<br>    主线程：也叫UI线程，或称ActivityThread，ActivityThread管理应用进程的主线程的执行(相当于普通Java程序的main入口函数)，Android系统中，在默认情况下，一个应用程序内的各个组件(如Activity、BroadcastReceiver、Service)都会在同一个进程(Process)里执行，<br>  且由此进程的主线程负责执行。<br>    ActivityThread既要处理Activity组件的UI事件，又要处理Service后台服务工作，通常会忙不过来。为了解决此问题，主线程可以创建多个子线程来处理后台服务工作，而本身专心处理UI画面的事件。<br>    子线程： 用于执行耗时操作，比如 I/O操作和网络请求等。（安卓3.0以后要求耗访问网络必须在子线程种执行）更新UI的工作必须交给主线程，子线程在安卓里是不允许更新UI的。<br>    一个Android应用程序被创建的时候都会创建一个UI主线程。有时进行一些比较耗时的操作时，为了防止阻塞UI主线程，我们会将耗时的操作放到子线程中进行处理，处理完之后操作UI。<br>  但是Android不允许子线程操作UI，违背了Android单线程模型的原则（即 Android UI操作并不是线程安全的并且这些操作必须在UI线程中执行），所以Android提供Handler消息机制来实现线程之间的通讯。<br>    总结：1. 主线程不能执行耗时操作</p>
-<pre><code>2. 子线程不能直接更新UI界面
-
-为什么系统不允许子线程更新UI？
-因为的UI控件不是线程安全的。
-如果在多线程中并发访问可能会导致UI控件处于不可预期的状态，那为什么不对UI控件的访问加上 上锁机制呢？因为有这么两个缺点：上锁会让UI控件变得复杂和低效、上锁后会阻塞某些进程的执行。
-</code></pre><h2 id="Handler机制的主要角色"><a href="#Handler机制的主要角色" class="headerlink" title="Handler机制的主要角色"></a>Handler机制的主要角色</h2><p>   Android中的异步消息处理主要由四个部分组成：Message对象或者Runnable对象、Handler、MessageQueue、Looper。</p>
+<h2 id="Handler机制产生背景"><a href="#Handler机制产生背景" class="headerlink" title="Handler机制产生背景"></a>Handler机制产生背景</h2><p>一个安卓程序的运行，就是一个进程的在执行，一个进程里面可以拥有很多个线程。<br>    主线程：也叫UI线程，或称ActivityThread，ActivityThread管理应用进程的主线程的执行(相当于普通Java程序的main入口函数)，Android系统中，在默认情况下，一个应用程序内的各个组件(如Activity、BroadcastReceiver、Service)都会在同一个进程(Process)里执行，<br>  且由此进程的主线程负责执行。<br>    ActivityThread既要处理Activity组件的UI事件，又要处理Service后台服务工作，通常会忙不过来。为了解决此问题，主线程可以创建多个子线程来处理后台服务工作，而本身专心处理UI画面的事件。<br>    子线程： 用于执行耗时操作，比如 I/O操作和网络请求等。（安卓3.0以后要求耗访问网络必须在子线程种执行）更新UI的工作必须交给主线程，子线程在安卓里是不允许更新UI的。<br>    一个Android应用程序被创建的时候都会创建一个UI主线程。有时进行一些比较耗时的操作时，为了防止阻塞UI主线程，我们会将耗时的操作放到子线程中进行处理，处理完之后操作UI。<br>  但是Android不允许子线程操作UI，违背了Android单线程模型的原则（即 Android UI操作并不是线程安全的并且这些操作必须在UI线程中执行），所以Android提供Handler消息机制来实现线程之间的通讯。<br>    总结：</p>
+<pre><code>1. 主线程不能执行耗时操作
+2. 子线程不能直接更新UI界面
+</code></pre><p>  为什么系统不允许子线程更新UI？<br>  因为的UI控件不是线程安全的。<br>  如果在多线程中并发访问可能会导致UI控件处于不可预期的状态，那为什么不对UI控件的访问加上 上锁机制呢？因为有这么两个缺点：上锁会让UI控件变得复杂和低效、上锁后会阻塞某些进程的执行。</p>
+<h2 id="Handler机制的主要角色"><a href="#Handler机制的主要角色" class="headerlink" title="Handler机制的主要角色"></a>Handler机制的主要角色</h2><p>   Android中的异步消息处理主要由四个部分组成：Message对象或者Runnable对象、Handler、MessageQueue、Looper。</p>
 <ol>
 <li>Message或者Runnable对象，携带信息，在不同线程之间交换数据。</li>
 <li>Handler，处理和发送消息。消息发出后，最终会回传到Handler的handleMessage()方法中。</li>
