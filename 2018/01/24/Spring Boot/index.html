@@ -6,15 +6,30 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives: 2017/9 | 普忞忞的博客</title>
+  <title>Spring Boot | 普忞忞的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="普忞忞的博客">
-<meta property="og:url" content="http://yoursite.com/archives/2017/09/index.html">
+  <meta name="description" content="好久没有更新了，淹没在项目不断的改需求和痛苦的论文阅读中。临近放假，昨天终于结束最后一份需求。今天回忆一下Spring Boot，当时自己学习了但是项目的开发里并未用到。不过轻便的Spring Boot不能被忘却！">
+<meta name="keywords" content="Web,Spring">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spring Boot">
+<meta property="og:url" content="http://yoursite.com/2018/01/24/Spring Boot/index.html">
 <meta property="og:site_name" content="普忞忞的博客">
+<meta property="og:description" content="好久没有更新了，淹没在项目不断的改需求和痛苦的论文阅读中。临近放假，昨天终于结束最后一份需求。今天回忆一下Spring Boot，当时自己学习了但是项目的开发里并未用到。不过轻便的Spring Boot不能被忘却！">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/assets/blogImage/traditional_war.png">
+<meta property="og:image" content="http://yoursite.com/assets/blogImage/traditional_compare.png">
+<meta property="og:image" content="http://yoursite.com/assets/blogImage/springboot_structure.png">
+<meta property="og:image" content="http://yoursite.com/assets/blogImage/parent_dependency.png">
+<meta property="og:image" content="http://yoursite.com/assets/blogImage/dependency.png">
+<meta property="og:image" content="http://yoursite.com/assets/blogImage/chapter1Application.png">
+<meta property="og:image" content="http://yoursite.com/assets/blogImage/auto1.png">
+<meta property="og:image" content="http://yoursite.com/assets/blogImage/factories.png">
+<meta property="og:image" content="http://yoursite.com/assets/blogImage/autoconfiguration.png">
+<meta property="og:updated_time" content="2018-01-24T11:24:31.118Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="普忞忞的博客">
+<meta name="twitter:title" content="Spring Boot">
+<meta name="twitter:description" content="好久没有更新了，淹没在项目不断的改需求和痛苦的论文阅读中。临近放假，昨天终于结束最后一份需求。今天回忆一下Spring Boot，当时自己学习了但是项目的开发里并未用到。不过轻便的Spring Boot不能被忘却！">
+<meta name="twitter:image" content="http://yoursite.com/assets/blogImage/traditional_war.png">
   
     <link rel="alternative" href="/atom.xml" title="普忞忞的博客" type="application/atom+xml">
   
@@ -150,44 +165,78 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-Spring Boot" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/09/27/Spring-AOP/" class="archive-article-date">
-  	<time datetime="2017-09-27T03:05:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-27</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/09/27/Spring-AOP/">Spring AOP</a>
+    <h1 class="article-title" itemprop="name">
+      Spring Boot
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2018/01/24/Spring Boot/" class="archive-article-date">
+  	<time datetime="2018-01-24T06:54:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-24</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>好久没有更新了，淹没在项目不断的改需求和痛苦的论文阅读中。临近放假，昨天终于结束最后一份需求。<br>今天回忆一下Spring Boot，当时自己学习了但是项目的开发里并未用到。不过轻便的Spring Boot不能被忘却！</p>
+<a id="more"></a>
+<h2 id="微服务（Microservice）应用背景"><a href="#微服务（Microservice）应用背景" class="headerlink" title="微服务（Microservice）应用背景"></a>微服务（Microservice）应用背景</h2><p>微服务这个概念近期是相当地火了，涌生了很多论文很多技术。在提升性能和速度方面起到了相当大的作用。<br>简单地说，微服务架构模式就是将整个Web应用组织分为一系列小的Web服务。这些小的Web服务可以独立地编译及部署，并通过各自暴露的API接口相互通讯。<br>它们彼此相互协作，作为一个整体为用户提供功能，却可以独立地进行扩容。<br>软件开发人员可以通过编译并重新部署单个子服务的方式来验证自己的更改，而不再需要重新编译整个应用，从而节省了大量的时间。<br><img src="/assets/blogImage/traditional_war.png" alt=""><br>从这张图里我们可以看到传统服务开发将jar文件统一打成一个war包，然后再进行发布。但是在我们进行更改测试的时候，编译部署整个工程却要花费大量的时间。<br>如图所示，编译和部署的时间随着工程的增大而增多。<br><img src="/assets/blogImage/traditional_compare.png" alt=""></p>
+<p>Spring Boot只需要非常少的几个配置就可以迅速方便地搭建起来一整套web项目。 且它含有内置的Tomcat。</p>
+<h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h2><p>构建一个Spring Boot的Maven项目，目录如右所示：<br>pom.xml：Maven构建说明文件。   Chapter1Application.java：一个带有main()方法的类，用于启动应用程序（关键）。<br>Chapter1ApplicationTests.java：一个空的Junit测试类。<br>application.properties：一个空的配置文件，可以根据需要添加配置属性。<br><img src="/assets/blogImage/springboot_structure.png" alt=""></p>
+<p>pom.xml:<br><img src="/assets/blogImage/parent_dependency.png" alt=""><br><img src="/assets/blogImage/dependency.png" alt=""></p>
+<p>父级依赖parent，spring-boot-starter-parent是一个特殊的starter,它用来提供相关的Maven默认依赖，使用它之后，常用的包依赖可以省去version标签。<br>Web起步依赖模块—–起步依赖本质上是一个Maven项目对象模型（Project Object Model，POM），定义了对其他库的传递依赖，这些东西加在一起即支持某项功能。<br>很多起步依赖的命名都暗示了它们提供的某种或者某类功能。这是spring boot的一个关键的应用之一。</p>
+<p>Chapter1Application.java：<br><img src="/assets/blogImage/chapter1Application.png" alt=""></p>
+<p>代码中可以看到几个重要的注解：</p>
+<h3 id="SpringBootApplication"><a href="#SpringBootApplication" class="headerlink" title="@SpringBootApplication"></a>@SpringBootApplication</h3><p>它的源码里有这样三个重要的注解：</p>
+<ol>
+<li>@Configration  任何一个标注了@Configuration的Java类定义都是一个JavaConfig配置类。</li>
+<li>@Componentscan 配置了这个标签后，spring可以自动去扫描root package下面或者子包下面的Java文件，如果扫描到有@Component 这些注解的类，则把这些类注册到IoC容器。</li>
+<li>@EnableAutoConfigration 这个注解可以自动载入应用程序所需要的所有Bean。<br>点开@EnableAutoConfigration的源码，该注解的源码中有一个EnableAutoConfigrationImportSelector.class类，该类继承了AutoConfigurationImportSelector，<br>它通过一个SpringFactoriesLoader方法去查询META-INF/spring.factories文件</li>
+</ol>
+<p><img src="/assets/blogImage/auto1.png" alt=""><br><img src="/assets/blogImage/factories.png" alt=""></p>
+<p>@enableautoconfigration也是借助@Import的帮助，将所有符合自动配置条件的bean定义加载到IoC容器，仅此而已！<br>流程：从classpath中搜寻所有的META-INF/spring.factories配置文件，并将其中org.springframework.boot.autoconfigure.EnableutoConfiguration对应的配置项通过反射（Java Refletion）<br>实例化为对应的标注了@Configuration的JavaConfig形式的IoC容器配置类，然后汇总为一个并加载到IoC容器。</p>
+<p>Spring即会通过spring.factories来初始化里面对应类。点开配置文件的源码，里面的@EnableConfigurationProperties自动映射一个POJO到Spring Boot配置文件（默认是application.properties文件）的属性集。<br><img src="/assets/blogImage/autoconfiguration.png" alt=""><br>以上这些都是SpringBoot的默认配置， 如果我们想改成实际的配置，我们只用在resource/application.properties里面设置即可。</p>
+<p>@EnableAutoConfigration总结：<br>其实是这个注解去查询META-INF/spring.factories，这里面列出了所有的SpringBoot的默认配置，包含了server，dao，data等等所有web应用需要用到的特性，并且将这些特性对应的pojo自动映射到application.properties上。</p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
-        		</li>
-      		 
         		<li class="article-tag-list-item">
         			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Web</a>
         		</li>
@@ -199,61 +248,104 @@
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2018/01/24/Spring Boot/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/09/08/Java-Web之-拦截器的使用/" class="archive-article-date">
-  	<time datetime="2017-09-08T11:33:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-08</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2017/12/16/web前端性能优化/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">web前端性能优化</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/09/08/Java-Web之-拦截器的使用/">Java Web之----拦截器的使用</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Web</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
   
 
-    
+  
 
 
           </div>
@@ -276,8 +368,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: true,
