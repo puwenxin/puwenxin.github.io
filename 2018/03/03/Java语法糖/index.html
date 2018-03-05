@@ -6,30 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Java Web之----拦截器的使用 | 普忞忞的博客</title>
+  <title>Java语法糖 | 普忞忞的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="拦截器能做什么在Web的开发中常有这样的场景，限制用户没有登录的时候不能对网站进行进一步的访问。在我们不使用拦截器技术的时候，要实现这个目的就需要在每个页面被访问时增加访问控制。这样既费时也费力。所以我们编写一些拦截器类，让用户的所有请求都能经过这些类，来判断是否登录等等。">
-<meta name="keywords" content="Java,Web">
+  <meta name="description" content="遇到的以及了解到的一些Java语法糖。">
+<meta name="keywords" content="Java">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Java Web之----拦截器的使用">
-<meta property="og:url" content="http://yoursite.com/2017/09/08/Java-Web之-拦截器的使用/index.html">
+<meta property="og:title" content="Java语法糖">
+<meta property="og:url" content="http://yoursite.com/2018/03/03/Java语法糖/index.html">
 <meta property="og:site_name" content="普忞忞的博客">
-<meta property="og:description" content="拦截器能做什么在Web的开发中常有这样的场景，限制用户没有登录的时候不能对网站进行进一步的访问。在我们不使用拦截器技术的时候，要实现这个目的就需要在每个页面被访问时增加访问控制。这样既费时也费力。所以我们编写一些拦截器类，让用户的所有请求都能经过这些类，来判断是否登录等等。">
+<meta property="og:description" content="遇到的以及了解到的一些Java语法糖。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/assets/blogImage/图片1.png">
-<meta property="og:image" content="http://yoursite.com/assets/blogImage/图片2.png">
-<meta property="og:image" content="http://yoursite.com/assets/blogImage/图片3.png">
-<meta property="og:image" content="http://yoursite.com/assets/blogImage/图片4.png">
-<meta property="og:image" content="http://yoursite.com/assets/blogImage/图片5.png">
-<meta property="og:image" content="http://yoursite.com/assets/blogImage/图片6.png">
-<meta property="og:image" content="http://yoursite.com/assets/blogImage/图片7.png">
-<meta property="og:image" content="http://yoursite.com/assets/blogImage/图片8.png">
-<meta property="og:image" content="http://yoursite.com/assets/blogImage/图片9.png">
-<meta property="og:updated_time" content="2017-09-08T12:57:00.577Z">
+<meta property="og:updated_time" content="2018-03-05T02:27:15.813Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Java Web之----拦截器的使用">
-<meta name="twitter:description" content="拦截器能做什么在Web的开发中常有这样的场景，限制用户没有登录的时候不能对网站进行进一步的访问。在我们不使用拦截器技术的时候，要实现这个目的就需要在每个页面被访问时增加访问控制。这样既费时也费力。所以我们编写一些拦截器类，让用户的所有请求都能经过这些类，来判断是否登录等等。">
-<meta name="twitter:image" content="http://yoursite.com/assets/blogImage/图片1.png">
+<meta name="twitter:title" content="Java语法糖">
+<meta name="twitter:description" content="遇到的以及了解到的一些Java语法糖。">
   
     <link rel="alternative" href="/atom.xml" title="普忞忞的博客" type="application/atom+xml">
   
@@ -165,41 +155,32 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-Java-Web之-拦截器的使用" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-Java语法糖" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      Java Web之----拦截器的使用
+      Java语法糖
     </h1>
   
 
         
-        <a href="/2017/09/08/Java-Web之-拦截器的使用/" class="archive-article-date">
-  	<time datetime="2017-09-08T11:33:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-08</time>
+        <a href="/2018/03/03/Java语法糖/" class="archive-article-date">
+  	<time datetime="2018-03-03T01:58:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-03</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="拦截器能做什么"><a href="#拦截器能做什么" class="headerlink" title="拦截器能做什么"></a>拦截器能做什么</h2><p>在Web的开发中常有这样的场景，限制用户没有登录的时候不能对网站进行进一步的访问。<br>在我们不使用拦截器技术的时候，要实现这个目的就需要在每个页面被访问时增加访问控制。这样既费时也费力。<br>所以我们编写一些拦截器类，让用户的所有请求都能经过这些类，来判断是否登录等等。<br><a id="more"></a></p>
-<h2 id="拦截器实现过程与用法举例"><a href="#拦截器实现过程与用法举例" class="headerlink" title="拦截器实现过程与用法举例"></a>拦截器实现过程与用法举例</h2><p>拦截器原则：解决一些共性问题。</p>
-<p>步骤：</p>
-<ol>
-<li>编写拦截器类实现HandlerInterceptor接口。</li>
-<li>将拦截器注册进SpringMVC框架中。</li>
-<li>配置拦截器的拦截规则</li>
-</ol>
-<p>2和3可同步完成，在spring-MVC.xml中配置。</p>
-<h3 id="拦截器实现"><a href="#拦截器实现" class="headerlink" title="拦截器实现"></a>拦截器实现</h3><p>如图所示，TestInterceptor要去实现HandlerInterceptor接口：<br><img src="/assets/blogImage/图片1.png" alt=""><br>其中，preHandle方法被叫做预处理回调方法。<br><img src="/assets/blogImage/图片2.png" alt=""><br>返回值表示我们是否需要将当前的请求拦截下来，true的话请求继续运行，否则请求被终止，只执行preHandle方法。Object表示被拦截的请求的对象，比如Controller下的方法。<br>HttpServletRequest里存储所有http请求的内容，Response李存储所有响应的内容。<br>运作过程是：返回true-&gt;执行下一个拦截器-&gt;执行被拦截的Controller</p>
-<p>判断用户是否登录：<br><img src="/assets/blogImage/图片3.png" alt=""><br>有时可能只需要实现三个回调方法中的某一个，如果实现HandlerInterceptor接口的话，三个方法必须实现，此时Spring提供了一个HandlerInterceptorAdapter接口，允许我们只实现需要的回调方法。</p>
-<p>接口中的第二个方法：postHandle方法，叫做后处理回调方法。<br>posthandle中有一个modelandview参数，可以改变显示的视图，或者修改发往视图的方法。<br><img src="/assets/blogImage/图片4.png" alt=""><br>效果图：<br><img src="/assets/blogImage/图片5.png" alt=""><br>在拦截器中写入：<br><img src="/assets/blogImage/图片6.png" alt=""><br>效果图：<br><img src="/assets/blogImage/图片7.png" alt=""><br>跳转到其他界面：<br><img src="/assets/blogImage/图片8.png" alt=""></p>
-<p>接口中第三个方法：afterCompletion，请求处理完毕回调方法。<br>afterCompletion请求结束之后，做一些资源的销毁，IO流的销毁等等，类似于析构函数，类似于try-catch-finally中的finally，一般不会用到。</p>
-<h3 id="注册进spring-mvc-xml"><a href="#注册进spring-mvc-xml" class="headerlink" title="注册进spring-mvc.xml"></a>注册进spring-mvc.xml</h3><p><img src="/assets/blogImage/图片9.png" alt=""></p>
-<p>完。</p>
+        <p>遇到的以及了解到的一些Java语法糖。<br><a id="more"></a></p>
+<p>Syntactic Sugar，这种语法对语言本身功能来说没有什么影响，只是为了方便程序员的开发，提高开发效率。<br>这些语法糖并不被虚拟机所支持，在编译成字节码阶段就自动转换成简单常用语法。</p>
+<h3 id="泛型和类型擦除"><a href="#泛型和类型擦除" class="headerlink" title="泛型和类型擦除"></a>泛型和类型擦除</h3><p>泛型机制是通过类型擦除来实现的，即Java中的泛型只在程序源代码中有效（源代码阶段提供类型检查），<br>在编译后的字节码中自动用强制类型转换进行替代。也就是说，Java语言中的泛型机制其实就是一颗语法糖。<br>    public static void main(String[] args){<br>      Map<string,string> maps = new HashMap<string,string>();<br>      map.put(“hello”,”nihao”);<br>      String hello=map.get(“hello”);<br>      System.out.println(hello);<br>    }<br>当上述源代码被编译为class文件后，泛型被擦除且引入强制类型转换:<br>    public static void main(String[] args){<br>          HashMap maps = new HashMap();<br>          map.put(“hello”,”nihao”);<br>          String hello=(String)map.get(“hello”); //强制转换<br>          System.out.println(hello);<br>    }</string,string></string,string></p>
+<h3 id="自动装箱拆箱"><a href="#自动装箱拆箱" class="headerlink" title="自动装箱拆箱"></a>自动装箱拆箱</h3><p>自动装箱与拆箱在使用的过程中，其实是一个语法糖，内部还是调用了相应的函数进行转换。</p>
+<h3 id="变长参数"><a href="#变长参数" class="headerlink" title="变长参数"></a>变长参数</h3><p>变长参数特性是在JDK1.5中引入的，使用变长参数有两个条件，一是变长的那一部分参数具有相同的类型，<br>二是变长参数必须位于方法参数列表的最后面。变长参数同样是Java中的语法糖，其内部实现是Java数组。</p>
+<p>（待续）</p>
 
       
 
@@ -235,10 +216,6 @@
 			 
         		<li class="article-tag-list-item">
         			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Web</a>
         		</li>
       		
 		</ul>
@@ -294,7 +271,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2017/09/08/Java-Web之-拦截器的使用/" alt="微信分享二维码">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2018/03/03/Java语法糖/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -308,18 +285,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2017/09/27/Spring-AOP/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          Spring AOP
-        
-      </div>
-    </a>
   
-  
-    <a href="/2017/08/28/工具和框架-IntelliJ、Maven和SSM/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">工具和框架---IntelliJ、Maven和SSM</div>
+    <a href="/2018/01/24/Spring Boot/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Spring Boot</div>
       <i class="icon-circle-right"></i>
     </a>
   
