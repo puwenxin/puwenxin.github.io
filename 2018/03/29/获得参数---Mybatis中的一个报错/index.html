@@ -6,30 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Spring Boot | 普忞忞的博客</title>
+  <title>获得参数---Mybatis中的一个报错&#39; | 普忞忞的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="好久没有更新了，淹没在项目不断的改需求和痛苦的论文阅读中。临近放假，昨天终于结束最后一份需求。今天回忆一下Spring Boot，当时自己学习了但是项目的开发里并未用到。不过轻便的Spring Boot不能被忘却！">
-<meta name="keywords" content="Web,Spring">
+  <meta name="description" content="最近遇到一个Mybatis上的问题。大概描述如下：在Mapper.xml文件中定义了这样一个函数：        select        from withdraw_info    where DATE_FORMAT(apply_time,’%Y%m’) = DATE_FORMAT(DATE_SUB(curdate(), INTERVAL 0 MONTH),’%Y%m’)          A">
+<meta name="keywords" content="Java,Web">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Spring Boot">
-<meta property="og:url" content="http://yoursite.com/2018/01/24/Spring Boot/index.html">
+<meta property="og:title" content="获得参数---Mybatis中的一个报错&#39;">
+<meta property="og:url" content="http://yoursite.com/2018/03/29/获得参数---Mybatis中的一个报错/index.html">
 <meta property="og:site_name" content="普忞忞的博客">
-<meta property="og:description" content="好久没有更新了，淹没在项目不断的改需求和痛苦的论文阅读中。临近放假，昨天终于结束最后一份需求。今天回忆一下Spring Boot，当时自己学习了但是项目的开发里并未用到。不过轻便的Spring Boot不能被忘却！">
+<meta property="og:description" content="最近遇到一个Mybatis上的问题。大概描述如下：在Mapper.xml文件中定义了这样一个函数：        select        from withdraw_info    where DATE_FORMAT(apply_time,’%Y%m’) = DATE_FORMAT(DATE_SUB(curdate(), INTERVAL 0 MONTH),’%Y%m’)          A">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/assets/blogImage/traditional_war.png">
-<meta property="og:image" content="http://yoursite.com/assets/blogImage/traditional_compare.png">
-<meta property="og:image" content="http://yoursite.com/assets/blogImage/springboot_structure.png">
-<meta property="og:image" content="http://yoursite.com/assets/blogImage/parent_dependency.png">
-<meta property="og:image" content="http://yoursite.com/assets/blogImage/dependency.png">
-<meta property="og:image" content="http://yoursite.com/assets/blogImage/chapter1Application.png">
-<meta property="og:image" content="http://yoursite.com/assets/blogImage/auto1.png">
-<meta property="og:image" content="http://yoursite.com/assets/blogImage/factories.png">
-<meta property="og:image" content="http://yoursite.com/assets/blogImage/autoconfiguration.png">
-<meta property="og:updated_time" content="2018-01-24T11:24:31.118Z">
+<meta property="og:updated_time" content="2018-03-29T12:40:37.313Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Spring Boot">
-<meta name="twitter:description" content="好久没有更新了，淹没在项目不断的改需求和痛苦的论文阅读中。临近放假，昨天终于结束最后一份需求。今天回忆一下Spring Boot，当时自己学习了但是项目的开发里并未用到。不过轻便的Spring Boot不能被忘却！">
-<meta name="twitter:image" content="http://yoursite.com/assets/blogImage/traditional_war.png">
+<meta name="twitter:title" content="获得参数---Mybatis中的一个报错&#39;">
+<meta name="twitter:description" content="最近遇到一个Mybatis上的问题。大概描述如下：在Mapper.xml文件中定义了这样一个函数：        select        from withdraw_info    where DATE_FORMAT(apply_time,’%Y%m’) = DATE_FORMAT(DATE_SUB(curdate(), INTERVAL 0 MONTH),’%Y%m’)          A">
   
     <link rel="alternative" href="/atom.xml" title="普忞忞的博客" type="application/atom+xml">
   
@@ -165,45 +155,36 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-Spring Boot" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="there-获得参数---Mybatis中的一个报错" class="article article-type-there " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      Spring Boot
+      获得参数---Mybatis中的一个报错&#39;
     </h1>
   
 
         
-        <a href="/2018/01/24/Spring Boot/" class="archive-article-date">
-  	<time datetime="2018-01-24T06:54:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-24</time>
+        <a href="/2018/03/29/获得参数---Mybatis中的一个报错/" class="archive-article-date">
+  	<time datetime="2018-03-29T09:10:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-29</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>好久没有更新了，淹没在项目不断的改需求和痛苦的论文阅读中。临近放假，昨天终于结束最后一份需求。<br>今天回忆一下Spring Boot，当时自己学习了但是项目的开发里并未用到。不过轻便的Spring Boot不能被忘却！</p>
+        <p>最近遇到一个Mybatis上的问题。<br>大概描述如下：<br>在Mapper.xml文件中定义了这样一个函数：<br>    <select id="selectByUidAndDate" resultmap="BaseResultMap" parametertype="java.lang.String"><br>    select<br>    <include refid="Base_Column_List"><br>    from withdraw_info<br>    where DATE_FORMAT(apply_time,’%Y%m’) = DATE_FORMAT(DATE_SUB(curdate(), INTERVAL 0 MONTH),’%Y%m’)<br>    <if test="uid!=null and uid!=''"><br>      AND uid=#{uid,jdbcType=VARCHAR}<br>    </if><br>   </include></select></p>
 <a id="more"></a>
-<h2 id="微服务（Microservice）应用背景"><a href="#微服务（Microservice）应用背景" class="headerlink" title="微服务（Microservice）应用背景"></a>微服务（Microservice）应用背景</h2><p>微服务这个概念近期是相当地火了，涌生了很多论文很多技术。在提升性能和速度方面起到了相当大的作用。<br>简单地说，微服务架构模式就是将整个Web应用组织分为一系列小的Web服务。这些小的Web服务可以独立地编译及部署，并通过各自暴露的API接口相互通讯。<br>它们彼此相互协作，作为一个整体为用户提供功能，却可以独立地进行扩容。<br>软件开发人员可以通过编译并重新部署单个子服务的方式来验证自己的更改，而不再需要重新编译整个应用，从而节省了大量的时间。<br><img src="/assets/blogImage/traditional_war.png" alt=""><br>从这张图里我们可以看到传统服务开发将jar文件统一打成一个war包，然后再进行发布。但是在我们进行更改测试的时候，编译部署整个工程却要花费大量的时间。<br>如图所示，编译和部署的时间随着工程的增大而增多。<br><img src="/assets/blogImage/traditional_compare.png" alt=""></p>
-<p>Spring Boot只需要非常少的几个配置就可以迅速方便地搭建起来一整套web项目。 且它含有内置的Tomcat。</p>
-<h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h2><p>构建一个Spring Boot的Maven项目，目录如右所示：<br>pom.xml：Maven构建说明文件。   Chapter1Application.java：一个带有main()方法的类，用于启动应用程序（关键）。<br>Chapter1ApplicationTests.java：一个空的Junit测试类。<br>application.properties：一个空的配置文件，可以根据需要添加配置属性。<br><img src="/assets/blogImage/springboot_structure.png" alt=""></p>
-<p>pom.xml:<br><img src="/assets/blogImage/parent_dependency.png" alt=""><br><img src="/assets/blogImage/dependency.png" alt=""></p>
-<p>父级依赖parent，spring-boot-starter-parent是一个特殊的starter,它用来提供相关的Maven默认依赖，使用它之后，常用的包依赖可以省去version标签。<br>Web起步依赖模块—–起步依赖本质上是一个Maven项目对象模型（Project Object Model，POM），定义了对其他库的传递依赖，这些东西加在一起即支持某项功能。<br>很多起步依赖的命名都暗示了它们提供的某种或者某类功能。这是spring boot的一个关键的应用之一。</p>
-<p>Chapter1Application.java：<br><img src="/assets/blogImage/chapter1Application.png" alt=""></p>
-<p>代码中可以看到几个重要的注解：</p>
-<h3 id="SpringBootApplication"><a href="#SpringBootApplication" class="headerlink" title="@SpringBootApplication"></a>@SpringBootApplication</h3><p>它的源码里有这样三个重要的注解：</p>
-<ol>
-<li>@Configration  任何一个标注了@Configuration的Java类定义都是一个JavaConfig配置类。</li>
-<li>@Componentscan 配置了这个标签后，spring可以自动去扫描root package下面或者子包下面的Java文件，如果扫描到有@Component 这些注解的类，则把这些类注册到IoC容器。</li>
-<li>@EnableAutoConfigration 这个注解可以自动载入应用程序所需要的所有Bean。<br>点开@EnableAutoConfigration的源码，该注解的源码中有一个EnableAutoConfigrationImportSelector.class类，该类继承了AutoConfigurationImportSelector，<br>它通过一个SpringFactoriesLoader方法去查询META-INF/spring.factories文件</li>
-</ol>
-<p><img src="/assets/blogImage/auto1.png" alt=""><br><img src="/assets/blogImage/factories.png" alt=""></p>
-<p>@enableautoconfigration也是借助@Import的帮助，将所有符合自动配置条件的bean定义加载到IoC容器，仅此而已！<br>流程：从classpath中搜寻所有的META-INF/spring.factories配置文件，并将其中org.springframework.boot.autoconfigure.EnableutoConfiguration对应的配置项通过反射（Java Refletion）<br>实例化为对应的标注了@Configuration的JavaConfig形式的IoC容器配置类，然后汇总为一个并加载到IoC容器。</p>
-<p>Spring即会通过spring.factories来初始化里面对应类。点开配置文件的源码，里面的@EnableConfigurationProperties自动映射一个POJO到Spring Boot配置文件（默认是application.properties文件）的属性集。<br><img src="/assets/blogImage/autoconfiguration.png" alt=""><br>以上这些都是SpringBoot的默认配置， 如果我们想改成实际的配置，我们只用在resource/application.properties里面设置即可。</p>
-<p>@EnableAutoConfigration总结：<br>其实是这个注解去查询META-INF/spring.factories，这里面列出了所有的SpringBoot的默认配置，包含了server，dao，data等等所有web应用需要用到的特性，并且将这些特性对应的pojo自动映射到application.properties上。</p>
+<p>根据服务器传回的uid参数，去数据库中查询。但是报了这样一个错：<br>There is no getter for property named ‘uid’ in ‘class java.lang.String’.<br>在网络上查了一下，把代码改为如下：<br>    <select id="selectByUidAndDate" resultmap="BaseResultMap" parametertype="java.lang.String"><br>    select<br>    <include refid="Base_Column_List"><br>    from withdraw_info<br>    where DATE_FORMAT(apply_time,’%Y%m’) = DATE_FORMAT(DATE_SUB(curdate(), INTERVAL 0 MONTH),’%Y%m’)<br>    <if test="_parameter!=null and _parameter!=''"><br>      AND uid=#{uid,jdbcType=VARCHAR}<br>    </if><br>  </include></select><br>就解决了这个问题。<br>这个错误之所以出现，是因为mybatis在对parameterType=”String”的sql语句做了限制。从mapper.getRiskMember方法一步步进入MapperProxy.java、<br>MapperMethod.java源码（过程略长）。直到进入DynamicContext.java类时：<br>    public DynamicContext(Configuration configuration, Object parameterObject) {<br>    if (parameterObject != null &amp;&amp; !(parameterObject instanceof Map)) {<br>      MetaObject metaObject = configuration.newMetaObject(parameterObject);<br>      bindings = new ContextMap(metaObject);<br>    } else {<br>      bindings = new ContextMap(null);<br>    }<br>    bindings.put(PARAMETER_OBJECT_KEY, parameterObject);<br>    bindings.put(DATABASE_ID_KEY, configuration.getDatabaseId());<br>  }<br>两个常量：<br>    public static final String PARAMETER_OBJECT_KEY = “_parameter”;<br>    public static final String DATABASE_ID_KEY = “_databaseId”;<br>进入MixedSqlNode.java：<br>    public boolean apply(DynamicContext context) {<br>    for (SqlNode sqlNode : contents) {<br>      sqlNode.apply(context);<br>    }<br>    return true;<br>  }<br>apply方法：xml里配置的sql语句，会通过该方法转换为标准的sql。<br>在最终的错误抛出以后，看到一个：Ognl.getValue(parseExpression(expression), root);方法。<br>在网络上查询，得到如下经过反编译的源码：<br>    public static Object getValue(Object tree, Map context, Object root, Class resultType)<br>    throws OgnlException<br>  {<br>    OgnlContext ognlContext = (OgnlContext)addDefaultContext(root, context);</p>
+<pre><code>Object result = ((Node)tree).getValue(ognlContext, root);
+if (resultType != null) {
+  result = getTypeConverter(context).convertValue(context, root, null, null, result, resultType);
+}
+return result;
+</code></pre><p>  }<br>原因：Mybatis默认采用ONGL解析参数，所以会自动采用对象树的形式取string.tableName值，引起报错。<br>还有一种解决方法：<br>在dao层接口中给相应的方法加上参数说明，如下：<br>    Map<string,object>getData(@Param(value=”uid”)String uid);</string,object></p>
+<p>xml文件中改成：<br>    &lt;select id=”getData” resultType=”BaseResultMap” parameterType=”String&gt;<br>        select *from ${uid} order by dataTime<br>    </p>
 
       
 
@@ -238,11 +219,11 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Web</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Spring</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Web</a>
         		</li>
       		
 		</ul>
@@ -298,7 +279,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2018/01/24/Spring Boot/" alt="微信分享二维码">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2018/03/29/获得参数---Mybatis中的一个报错/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -312,18 +293,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2018/03/03/Java语法糖/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          Java语法糖
-        
-      </div>
-    </a>
   
-  
-    <a href="/2017/12/16/web前端性能优化/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">web前端性能优化</div>
+    <a href="/2018/03/03/Java语法糖/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Java语法糖</div>
       <i class="icon-circle-right"></i>
     </a>
   
