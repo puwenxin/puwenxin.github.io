@@ -172,7 +172,16 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>最近遇到一个Mybatis上的问题。<br>大概描述如下：<br>在Mapper.xml文件中定义了这样一个函数：<br>    <select id="selectByUidAndDate" resultmap="BaseResultMap" parametertype="java.lang.String"><br>    select<br>    <include refid="Base_Column_List"><br>    from withdraw_info<br>    where DATE_FORMAT(apply_time,’%Y%m’) = DATE_FORMAT(DATE_SUB(curdate(), INTERVAL 0 MONTH),’%Y%m’)<br>    <if test="uid!=null and uid!=''"><br>      AND uid=#{uid,jdbcType=VARCHAR}<br>    </if><br>   </include></select></p>
+        <p>最近遇到一个Mybatis上的问题。<br>大概描述如下：<br>在Mapper.xml文件中定义了这样一个函数：</p>
+<pre><code>&lt;select id=&quot;selectByUidAndDate&quot; resultMap=&quot;BaseResultMap&quot; parameterType=&quot;java.lang.String&quot; &gt;
+select
+&lt;include refid=&quot;Base_Column_List&quot; /&gt;
+from withdraw_info
+where DATE_FORMAT(apply_time,&apos;%Y%m&apos;) = DATE_FORMAT(DATE_SUB(curdate(), INTERVAL 0 MONTH),&apos;%Y%m&apos;)
+&lt;if test=&quot;uid!=null and uid!=&apos;&apos;&quot;&gt;
+  AND uid=#{uid,jdbcType=VARCHAR}
+&lt;/if&gt;
+</code></pre><p>   </p>
         
           <a class="article-more-a" href="/2018/03/29/获得参数---Mybatis中的一个报错/#more">more >></a>
         
