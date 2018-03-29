@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="普忞忞的博客">
 <meta property="og:description" content="最近遇到一个Mybatis上的问题。大概描述如下：在Mapper.xml文件中定义了这样一个函数：        select        from withdraw_info    where DATE_FORMAT(apply_time,’%Y%m’) = DATE_FORMAT(DATE_SUB(curdate(), INTERVAL 0 MONTH),’%Y%m’)          A">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-03-29T12:40:37.313Z">
+<meta property="og:updated_time" content="2018-03-29T12:46:18.378Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="获得参数---Mybatis中的一个报错&#39;">
 <meta name="twitter:description" content="最近遇到一个Mybatis上的问题。大概描述如下：在Mapper.xml文件中定义了这样一个函数：        select        from withdraw_info    where DATE_FORMAT(apply_time,’%Y%m’) = DATE_FORMAT(DATE_SUB(curdate(), INTERVAL 0 MONTH),’%Y%m’)          A">
@@ -177,15 +177,51 @@
       
         <p>最近遇到一个Mybatis上的问题。<br>大概描述如下：<br>在Mapper.xml文件中定义了这样一个函数：<br>    <select id="selectByUidAndDate" resultmap="BaseResultMap" parametertype="java.lang.String"><br>    select<br>    <include refid="Base_Column_List"><br>    from withdraw_info<br>    where DATE_FORMAT(apply_time,’%Y%m’) = DATE_FORMAT(DATE_SUB(curdate(), INTERVAL 0 MONTH),’%Y%m’)<br>    <if test="uid!=null and uid!=''"><br>      AND uid=#{uid,jdbcType=VARCHAR}<br>    </if><br>   </include></select></p>
 <a id="more"></a>
-<p>根据服务器传回的uid参数，去数据库中查询。但是报了这样一个错：<br>There is no getter for property named ‘uid’ in ‘class java.lang.String’.<br>在网络上查了一下，把代码改为如下：<br>    <select id="selectByUidAndDate" resultmap="BaseResultMap" parametertype="java.lang.String"><br>    select<br>    <include refid="Base_Column_List"><br>    from withdraw_info<br>    where DATE_FORMAT(apply_time,’%Y%m’) = DATE_FORMAT(DATE_SUB(curdate(), INTERVAL 0 MONTH),’%Y%m’)<br>    <if test="_parameter!=null and _parameter!=''"><br>      AND uid=#{uid,jdbcType=VARCHAR}<br>    </if><br>  </include></select><br>就解决了这个问题。<br>这个错误之所以出现，是因为mybatis在对parameterType=”String”的sql语句做了限制。从mapper.getRiskMember方法一步步进入MapperProxy.java、<br>MapperMethod.java源码（过程略长）。直到进入DynamicContext.java类时：<br>    public DynamicContext(Configuration configuration, Object parameterObject) {<br>    if (parameterObject != null &amp;&amp; !(parameterObject instanceof Map)) {<br>      MetaObject metaObject = configuration.newMetaObject(parameterObject);<br>      bindings = new ContextMap(metaObject);<br>    } else {<br>      bindings = new ContextMap(null);<br>    }<br>    bindings.put(PARAMETER_OBJECT_KEY, parameterObject);<br>    bindings.put(DATABASE_ID_KEY, configuration.getDatabaseId());<br>  }<br>两个常量：<br>    public static final String PARAMETER_OBJECT_KEY = “_parameter”;<br>    public static final String DATABASE_ID_KEY = “_databaseId”;<br>进入MixedSqlNode.java：<br>    public boolean apply(DynamicContext context) {<br>    for (SqlNode sqlNode : contents) {<br>      sqlNode.apply(context);<br>    }<br>    return true;<br>  }<br>apply方法：xml里配置的sql语句，会通过该方法转换为标准的sql。<br>在最终的错误抛出以后，看到一个：Ognl.getValue(parseExpression(expression), root);方法。<br>在网络上查询，得到如下经过反编译的源码：<br>    public static Object getValue(Object tree, Map context, Object root, Class resultType)<br>    throws OgnlException<br>  {<br>    OgnlContext ognlContext = (OgnlContext)addDefaultContext(root, context);</p>
+<p>根据服务器传回的uid参数，去数据库中查询。但是报了这样一个错：<br>There is no getter for property named ‘uid’ in ‘class java.lang.String’.<br>在网络上查了一下，把代码改为如下：</p>
+<pre><code>&lt;select id=&quot;selectByUidAndDate&quot; resultMap=&quot;BaseResultMap&quot; parameterType=&quot;java.lang.String&quot; &gt;
+select
+&lt;include refid=&quot;Base_Column_List&quot; /&gt;
+from withdraw_info
+where DATE_FORMAT(apply_time,&apos;%Y%m&apos;) = DATE_FORMAT(DATE_SUB(curdate(), INTERVAL 0 MONTH),&apos;%Y%m&apos;)
+&lt;if test=&quot;_parameter!=null and _parameter!=&apos;&apos;&quot;&gt;
+  AND uid=#{uid,jdbcType=VARCHAR}
+&lt;/if&gt;
+</code></pre><p>  </p>
+<p>就解决了这个问题。<br>这个错误之所以出现，是因为mybatis在对parameterType=”String”的sql语句做了限制。从mapper.getRiskMember方法一步步进入MapperProxy.java、<br>MapperMethod.java源码（过程略长）。直到进入DynamicContext.java类时：</p>
+<pre><code>public DynamicContext(Configuration configuration, Object parameterObject) {
+if (parameterObject != null &amp;&amp; !(parameterObject instanceof Map)) {
+  MetaObject metaObject = configuration.newMetaObject(parameterObject);
+  bindings = new ContextMap(metaObject);
+} else {
+  bindings = new ContextMap(null);
+}
+bindings.put(PARAMETER_OBJECT_KEY, parameterObject);
+bindings.put(DATABASE_ID_KEY, configuration.getDatabaseId());
+</code></pre><p>  }</p>
+<p>两个常量：<br>    public static final String PARAMETER_OBJECT_KEY = “_parameter”;<br>    public static final String DATABASE_ID_KEY = “_databaseId”;</p>
+<p>进入MixedSqlNode.java：</p>
+<pre><code>public boolean apply(DynamicContext context) {
+for (SqlNode sqlNode : contents) {
+  sqlNode.apply(context);
+}
+return true;
+</code></pre><p>  }</p>
+<p>apply方法：xml里配置的sql语句，会通过该方法转换为标准的sql。<br>在最终的错误抛出以后，看到一个：Ognl.getValue(parseExpression(expression), root);方法。<br>在网络上查询，得到如下经过反编译的源码：</p>
+<pre><code>public static Object getValue(Object tree, Map context, Object root, Class resultType)
+throws OgnlException
+</code></pre><p>  {<br>    OgnlContext ognlContext = (OgnlContext)addDefaultContext(root, context);</p>
 <pre><code>Object result = ((Node)tree).getValue(ognlContext, root);
 if (resultType != null) {
   result = getTypeConverter(context).convertValue(context, root, null, null, result, resultType);
 }
 return result;
-</code></pre><p>  }<br>原因：Mybatis默认采用ONGL解析参数，所以会自动采用对象树的形式取string.tableName值，引起报错。<br>还有一种解决方法：<br>在dao层接口中给相应的方法加上参数说明，如下：<br>    Map<string,object>getData(@Param(value=”uid”)String uid);</string,object></p>
-<p>xml文件中改成：<br>    &lt;select id=”getData” resultType=”BaseResultMap” parameterType=”String&gt;<br>        select *from ${uid} order by dataTime<br>    </p>
-
+</code></pre><p>  }</p>
+<p>原因：Mybatis默认采用ONGL解析参数，所以会自动采用对象树的形式取string.tableName值，引起报错。<br>还有一种解决方法：<br>在dao层接口中给相应的方法加上参数说明，如下：<br>    Map<string,object>getData(@Param(value=”uid”)String uid);</string,object></p>
+<p>xml文件中改成：</p>
+<pre><code>&lt;select id=&quot;getData&quot; resultType=&quot;BaseResultMap&quot; parameterType=&quot;String&gt;
+    select *from ${uid} order by dataTime
+&lt;/select&gt;
+</code></pre>
       
 
       
@@ -427,15 +463,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Spring</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">javaScript</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">前端</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Spring</a>
               </li>
             
             <div class="clearfix"></div>
