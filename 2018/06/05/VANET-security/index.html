@@ -6,15 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Tag: Web | 普忞忞的博客</title>
+  <title>VANET security | 普忞忞的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="普忞忞的博客">
-<meta property="og:url" content="http://yoursite.com/tags/Web/index.html">
+  <meta name="description" content="好久没有更新过啦，论文让人苦恼。因为实验室主要的研究领域是VANET, 所以我选择了VANET security作为研究方向。VANET 场景在传统的通信安全系统中多了几个特别的因素，比如很高的动态性（high mobility），这就要求响应速度很快的安全协议。还有因为现在车对车的底层通信几乎都采用IEEE 802.11无线通信协议，所以存在着不稳定、易被攻击等问题。本篇主要记述我所研究的问题，">
+<meta name="keywords" content="车联网,security">
+<meta property="og:type" content="article">
+<meta property="og:title" content="VANET security">
+<meta property="og:url" content="http://yoursite.com/2018/06/05/VANET-security/index.html">
 <meta property="og:site_name" content="普忞忞的博客">
+<meta property="og:description" content="好久没有更新过啦，论文让人苦恼。因为实验室主要的研究领域是VANET, 所以我选择了VANET security作为研究方向。VANET 场景在传统的通信安全系统中多了几个特别的因素，比如很高的动态性（high mobility），这就要求响应速度很快的安全协议。还有因为现在车对车的底层通信几乎都采用IEEE 802.11无线通信协议，所以存在着不稳定、易被攻击等问题。本篇主要记述我所研究的问题，">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-07-05T03:14:47.459Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="普忞忞的博客">
+<meta name="twitter:title" content="VANET security">
+<meta name="twitter:description" content="好久没有更新过啦，论文让人苦恼。因为实验室主要的研究领域是VANET, 所以我选择了VANET security作为研究方向。VANET 场景在传统的通信安全系统中多了几个特别的因素，比如很高的动态性（high mobility），这就要求响应速度很快的安全协议。还有因为现在车对车的底层通信几乎都采用IEEE 802.11无线通信协议，所以存在着不稳定、易被攻击等问题。本篇主要记述我所研究的问题，">
   
     <link rel="alternative" href="/atom.xml" title="普忞忞的博客" type="application/atom+xml">
   
@@ -150,296 +155,181 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-VANET-security" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      VANET security
+    </h1>
+  
+
+        
+        <a href="/2018/06/05/VANET-security/" class="archive-article-date">
+  	<time datetime="2018-06-05T02:14:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-05</time>
+</a>
+        
+      </header>
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>好久没有更新过啦，论文让人苦恼。因为实验室主要的研究领域是VANET, 所以我选择了VANET security作为研究方向。VANET 场景在传统的通信安全系统中<br>多了几个特别的因素，比如很高的动态性（high mobility），这就要求响应速度很快的安全协议。还有因为现在车对车的底层通信几乎都采用IEEE 802.11无线<br>通信协议，所以存在着不稳定、易被攻击等问题。<br>本篇主要记述我所研究的问题，以及一些思考。</p>
+<a id="more"></a>
+<h2 id="问题出发点"><a href="#问题出发点" class="headerlink" title="问题出发点"></a>问题出发点</h2><p>在车联网环境里，有关安全的问题主要有两个出发点：一是通信信息的加密，即协议的秘密性。二是通信者自身安全信息的保护，即隐私保护。<br>通信者希望自己发出的消息能够很快的被目的节点收到且破译，与此同时保护自己的真实信息不暴露给非法恶意节点。<br>有的时候，安全性越高，越满足不了实时性。而安全性较低的话，又不能有效地保护用户隐私。这其实是有点矛盾的问题，所以对我们的安全协议<br>提出了很高的要求。</p>
+<h2 id="不同方案"><a href="#不同方案" class="headerlink" title="不同方案"></a>不同方案</h2><p>安全通信协议主要有以下几种不同的方案：</p>
+<blockquote>
+<ul>
+<li>基于公钥证书的通信体系（public key infrastructure）</li>
+<li>基于身份的加密通信体系（id-based）</li>
+<li>基于群或组的加密通信体系（group or ring signature）</li>
+</ul>
+</blockquote>
+<p>底层其实仍旧是传统的加解密方式，比如对称的，非对称的。以及大多使用椭圆曲线加密，还有双线性对等。但是基于车联网的特点，又会做出很多改变。<br>对于公钥证书的加密方式，它虽然简单但是需要节点存储大量证书，运行速度会逐渐变慢，也需要高效的身份废止方案。这是比较传统的一种方案。<br>基于身份的加解密体系用的比较多，但是计算上往往是比较复杂的，且在设计中需要非常多的数学知识。对于我们这种非数学专业出身的人而言，是<br>一个不小的挑战。<br>基于群或环的通信体系主要是用来做隐私保护的，一般一个群组内的成员共享一个群公钥，群内合法成员可以用该公钥签名发送消息，而其他成员可以验证<br>但却不知道消息是谁发出的。以此来做到隐私保护和匿名性。但是群组也存在着诸如共谋，群成员太多导致通信延迟等问题。<br>关于这几种方案都有很多很多的变形，但主要思想仍几乎属于这三大类。数学底子好的研究者，一般会倾向于密码学的方案，来保护安全性。</p>
+<h2 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h2><p>因为在这之中最主要的还是通信协议，所以还是把主要关注点放在设计安全且时延低的通信协议上来。<br>首先摒弃复杂，计算量大的数学方法，多使用one way hash function等方式设计通信协议。其次设计通信管理方案，有效降低通信开销。因为在车联网中，定期的消息的发送<br>会使得通信开销变得很大，所以适度的调配策略是很需要的。<br>我设想的主要方案是以上这些，具体细节不会在这详述，有兴趣可以发邮件讨论：puwenxingtm@foxmail.com</p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-there">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/03/29/获得参数---Mybatis中的一个报错/" class="archive-article-date">
-  	<time datetime="2018-03-29T09:10:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-29</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/03/29/获得参数---Mybatis中的一个报错/">获得参数---Mybatis中的一个报错&#39;</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">车联网</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Web</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">security</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/01/24/Spring Boot/" class="archive-article-date">
-  	<time datetime="2018-01-24T06:54:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-24</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/01/24/Spring Boot/">Spring Boot</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Web</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Spring</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
       
-        </div></section>
+
       
+
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/12/16/web前端性能优化/" class="archive-article-date">
-  	<time datetime="2017-12-16T10:55:51.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-16</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/12/16/web前端性能优化/">web前端性能优化</a>
-    </h1>
-  
+      </div>
+    </span>
+  </div>
+</div>
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Web</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">javaScript</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">前端</a>
-        		</li>
-      		
-		</ul>
-	</div>
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2018/06/05/VANET-security/" alt="微信分享二维码">
+    </div>
+</div>
 
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/09/27/Spring-AOP/" class="archive-article-date">
-  	<time datetime="2017-09-27T03:05:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-27</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2018/03/29/获得参数---Mybatis中的一个报错/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">获得参数---Mybatis中的一个报错&#39;</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/09/27/Spring-AOP/">Spring AOP</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Web</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Spring</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/09/08/Java-Web之-拦截器的使用/" class="archive-article-date">
-  	<time datetime="2017-09-08T11:33:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-08</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/09/08/Java-Web之-拦截器的使用/">Java Web之----拦截器的使用</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Web</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/08/28/工具和框架-IntelliJ、Maven和SSM/" class="archive-article-date">
-  	<time datetime="2017-08-28T08:03:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-28</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/08/28/工具和框架-IntelliJ、Maven和SSM/">工具和框架---IntelliJ、Maven和SSM</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Web</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Spring</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
 
 
           </div>
@@ -462,9 +352,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: true,
 		toc_hide_index: true,
