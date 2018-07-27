@@ -6,15 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives: 2017/10 | 普忞忞的博客</title>
+  <title>浅析InterruptedException | 普忞忞的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="普忞忞的博客">
-<meta property="og:url" content="http://yoursite.com/archives/2017/10/index.html">
+  <meta name="description" content="要使任务和线程能够安全、快速、可靠地停下来，并不是一件容易的事。Java并没有提供任何机制安全地终止线程。但它提供了中断，这是一种协作机制，能够使一个线程终止另一个线程的当前工作。之前看着部分的时候，对中断和中断策略一直比较混乱，在此整理一点东西。有一点始终应该记在心里：行为良好的软件能很完善地处理失败、关闭和取消等过程。">
+<meta name="keywords" content="Java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="浅析InterruptedException">
+<meta property="og:url" content="http://yoursite.com/2018/07/17/浅析InterruptedException/index.html">
 <meta property="og:site_name" content="普忞忞的博客">
+<meta property="og:description" content="要使任务和线程能够安全、快速、可靠地停下来，并不是一件容易的事。Java并没有提供任何机制安全地终止线程。但它提供了中断，这是一种协作机制，能够使一个线程终止另一个线程的当前工作。之前看着部分的时候，对中断和中断策略一直比较混乱，在此整理一点东西。有一点始终应该记在心里：行为良好的软件能很完善地处理失败、关闭和取消等过程。">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-07-27T09:31:17.004Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="普忞忞的博客">
+<meta name="twitter:title" content="浅析InterruptedException">
+<meta name="twitter:description" content="要使任务和线程能够安全、快速、可靠地停下来，并不是一件容易的事。Java并没有提供任何机制安全地终止线程。但它提供了中断，这是一种协作机制，能够使一个线程终止另一个线程的当前工作。之前看着部分的时候，对中断和中断策略一直比较混乱，在此整理一点东西。有一点始终应该记在心里：行为良好的软件能很完善地处理失败、关闭和取消等过程。">
   
     <link rel="alternative" href="/atom.xml" title="普忞忞的博客" type="application/atom+xml">
   
@@ -150,36 +155,66 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-浅析InterruptedException" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/10/24/Android中异步通信机制/" class="archive-article-date">
-  	<time datetime="2017-10-24T07:17:55.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-24</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/10/24/Android中异步通信机制/">Android中异步通信机制</a>
+    <h1 class="article-title" itemprop="name">
+      浅析InterruptedException
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2018/07/17/浅析InterruptedException/" class="archive-article-date">
+  	<time datetime="2018-07-17T09:07:17.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-07-17</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>要使任务和线程能够安全、快速、可靠地停下来，并不是一件容易的事。Java并没有提供任何机制安全地终止线程。但它提供了中断，这是一种协作<br>机制，能够使一个线程终止另一个线程的当前工作。之前看着部分的时候，对中断和中断策略一直比较混乱，在此整理一点东西。<br>有一点始终应该记在心里：行为良好的软件能很完善地处理失败、关闭和取消等过程。</p>
+<a id="more"></a>
+<p>中断是一种协作机制。当一个线程中断另一个线程时，被中断的线程不一定要立即停止正在做的事情。<br>相反，中断是礼貌地请求另一个线程在它愿意并且方便的时候停止它正在做的事情。有些方法，例如 Thread.sleep()，很认真地对待这样的请求，<br>但每个方法不是一定要对中断作出响应。</p>
+<h2 id="处理InterruptedException"><a href="#处理InterruptedException" class="headerlink" title="处理InterruptedException"></a>处理InterruptedException</h2><p>如果抛出 InterruptedException 意味着一个方法是阻塞方法，那么调用一个阻塞方法则意味着该方法也是一个阻塞方法，<br>而且应该有某种策略来处理 InterruptedException。通常最容易的策略是自己抛出 InterruptedException。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">public class TaskQueue &#123;</div><div class="line">    private static final int MAX_TASKS = 1000;</div><div class="line"></div><div class="line">    private BlockingQueue&lt;Task&gt; queue</div><div class="line">        = new LinkedBlockingQueue&lt;Task&gt;(MAX_TASKS);</div><div class="line"></div><div class="line">    public void putTask(Task r) throws InterruptedException &#123;</div><div class="line">        queue.put(r);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public Task getTask() throws InterruptedException &#123;</div><div class="line">        return queue.take();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>有时候需要在传播异常之前进行一些清理工作。在这种情况下，可以捕捉 InterruptedException，执行清理，然后抛出异常。如图所示，<br>该代码是用于匹配在线游戏服务中的玩家的一种机制。 matchPlayers() 方法等待两个玩家到来，然后开始一个新游戏。如果在一个玩家已到来，但是另<br>一个玩家仍未到来之际该方法被中断，那么它会将那个玩家放回队列中，然后重新抛出 InterruptedException，这样那个玩家对游戏的请求就不至于丢失。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">public class PlayerMatcher &#123;</div><div class="line">    private PlayerSource players;</div><div class="line">    public PlayerMatcher(PlayerSource players) &#123;</div><div class="line">        this.players = players;</div><div class="line">    &#125;</div><div class="line">    public void matchPlayers() throws InterruptedException &#123;</div><div class="line">        try &#123;</div><div class="line">             Player playerOne, playerTwo;</div><div class="line">             while (true) &#123;</div><div class="line">                 playerOne = playerTwo = null;</div><div class="line">                 playerOne = players.waitForPlayer();</div><div class="line">                 playerTwo = players.waitForPlayer();</div><div class="line">                 startNewGame(playerOne, playerTwo);</div><div class="line">             &#125;</div><div class="line">         &#125;</div><div class="line">         catch (InterruptedException e) &#123;</div><div class="line">             // If we got one player and were interrupted, put that player back</div><div class="line">             if (playerOne != null)</div><div class="line">                 players.addFirst(playerOne);</div><div class="line">             // Then propagate the exception</div><div class="line">             throw e;</div><div class="line">         &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>有时候抛出 InterruptedException 并不合适，例如当由 Runnable 定义的任务调用一个可中断的方法时，就是如此。在这种情况下，<br>不能重新抛出 InterruptedException，但是也不想什么都不做。当一个阻塞方法检测到中断并抛出 InterruptedException 时，它清除中断状态。<br>如果捕捉到 InterruptedException 但是不能重新抛出它，那么应该保留中断发生的证据，以便调用栈中更高层的代码能知道中断，并对中断作出响应。<br>该任务可以通过调用 interrupt() 以 “重新中断” 当前线程来完成，如下所示。至少，每当捕捉到 InterruptedException 并且不重新抛出它时，<br>就在返回之前重新中断当前线程。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">public class TaskRunner implements Runnable &#123;</div><div class="line">    private BlockingQueue&lt;Task&gt; queue;</div><div class="line">    public TaskRunner(BlockingQueue&lt;Task&gt; queue) &#123;</div><div class="line">        this.queue = queue;</div><div class="line">    &#125;</div><div class="line">   public void run() &#123;</div><div class="line">        try &#123;</div><div class="line">             while (true) &#123;</div><div class="line">                 Task task = queue.take(10, TimeUnit.SECONDS);</div><div class="line">                 task.execute();</div><div class="line">             &#125;</div><div class="line">         &#125;</div><div class="line">         catch (InterruptedException e) &#123;</div><div class="line">             // Restore the interrupted status</div><div class="line">             Thread.currentThread().interrupt();</div><div class="line">         &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/weixin.JPG">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -187,27 +222,108 @@
         		<li class="article-tag-list-item">
         			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
         		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Android</a>
-        		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2018/07/17/浅析InterruptedException/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2018/06/05/VANET-security/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">VANET security</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+
+  
 
 
           </div>
@@ -230,8 +346,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: true,
