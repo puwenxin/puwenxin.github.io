@@ -21,7 +21,7 @@
 <meta property="og:image" content="http://yoursite.com/assets/blogImage/TIM截图20180827162210.png">
 <meta property="og:image" content="http://yoursite.com/assets/blogImage/TIM截图20180827162346.png">
 <meta property="og:image" content="http://yoursite.com/assets/blogImage/TIM截图20180827162443.png">
-<meta property="og:updated_time" content="2018-09-30T06:25:42.753Z">
+<meta property="og:updated_time" content="2018-09-30T06:29:35.747Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="面试问题整理">
 <meta name="twitter:description" content="提前批几乎接近尾声，记录几个自己遇到的问题。 HashMap get时死锁如果是在单线程下使用HashMap，自然是没有问题的，但是在多线程的环境下，在某些未知的时间点，会发现CPU占用100%，居高不下，举个例子，比如在类方法中定义了HashMap，那这个HashMap就是所有实例共享的。通过查看堆栈，会发现线程都Hang在HashMap的get()方法上，服务重启之后，问题消失，过段时间可能又">
@@ -191,11 +191,17 @@
 <blockquote>
 <ul>
 <li>被多次调用的方法</li>
-<li>被多次执行的循环体<br>对于第一种，编译器会将整个方法作为编译对象，这也是标准的JIT 编译方式。对于第二种是由循环体出发的，但是编译器依然会以整个方法作为编译对象，因为发生在方法执行过程中，称为栈上替换。<br>判断一段代码是否是热点代码，是不是需要出发即时编译，这样的行为称为热点探测（Hot Spot Detection），探测算法有两种，分别为:</li>
-<li>基于采样的热点探测（Sample Based Hot Spot Detection）：虚拟机会周期的对各个线程栈顶进行检查，如果某些方法经常出现在栈顶，这个方法就是“热点方法”。好处是实现简单、高效，很容易获取方法调用关系。缺点是很难确认方法的reduce，容易受到线程阻塞或其他外因扰乱。</li>
-<li>基于计数器的热点探测（Counter Based Hot Spot Detection）：为每个方法（甚至是代码块）建立计数器，执行次数超过阈值就认为是“热点方法”。优点是统计结果精确严谨。缺点是实现麻烦，不能直接获取方法的调用关系。<br>HotSpot 使用的是第二种-基于技术其的热点探测，并且有两类计数器：方法调用计数器（Invocation Counter ）和回边计数器（Back Edge Counter ）。<br>这两个计数器都有一个确定的阈值，超过后便会触发 JIT 编译。</li>
+<li>被多次执行的循环体</li>
 </ul>
 </blockquote>
+<p>对于第一种，编译器会将整个方法作为编译对象，这也是标准的JIT 编译方式。对于第二种是由循环体出发的，但是编译器依然会以整个方法作为编译对象，因为发生在方法执行过程中，称为栈上替换。<br>判断一段代码是否是热点代码，是不是需要出发即时编译，这样的行为称为热点探测（Hot Spot Detection），探测算法有两种，分别为:</p>
+<blockquote>
+<ul>
+<li>基于采样的热点探测（Sample Based Hot Spot Detection）：虚拟机会周期的对各个线程栈顶进行检查，如果某些方法经常出现在栈顶，这个方法就是“热点方法”。好处是实现简单、高效，很容易获取方法调用关系。缺点是很难确认方法的reduce，容易受到线程阻塞或其他外因扰乱。</li>
+<li>基于计数器的热点探测（Counter Based Hot Spot Detection）：为每个方法（甚至是代码块）建立计数器，执行次数超过阈值就认为是“热点方法”。优点是统计结果精确严谨。缺点是实现麻烦，不能直接获取方法的调用关系。</li>
+</ul>
+</blockquote>
+<p>HotSpot 使用的是第二种-基于技术其的热点探测，并且有两类计数器：方法调用计数器（Invocation Counter ）和回边计数器（Back Edge Counter ）。<br>这两个计数器都有一个确定的阈值，超过后便会触发 JIT 编译。</p>
 
       
 
