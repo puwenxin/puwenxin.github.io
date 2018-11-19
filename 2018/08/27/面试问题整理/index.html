@@ -21,7 +21,7 @@
 <meta property="og:image" content="http://yoursite.com/assets/blogImage/TIM截图20180827162210.png">
 <meta property="og:image" content="http://yoursite.com/assets/blogImage/TIM截图20180827162346.png">
 <meta property="og:image" content="http://yoursite.com/assets/blogImage/TIM截图20180827162443.png">
-<meta property="og:updated_time" content="2018-09-30T06:29:35.747Z">
+<meta property="og:updated_time" content="2018-11-16T03:49:58.974Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="面试问题整理">
 <meta name="twitter:description" content="提前批几乎接近尾声，记录几个自己遇到的问题。 HashMap get时死锁如果是在单线程下使用HashMap，自然是没有问题的，但是在多线程的环境下，在某些未知的时间点，会发现CPU占用100%，居高不下，举个例子，比如在类方法中定义了HashMap，那这个HashMap就是所有实例共享的。通过查看堆栈，会发现线程都Hang在HashMap的get()方法上，服务重启之后，问题消失，过段时间可能又">
@@ -202,6 +202,7 @@
 </ul>
 </blockquote>
 <p>HotSpot 使用的是第二种-基于技术其的热点探测，并且有两类计数器：方法调用计数器（Invocation Counter ）和回边计数器（Back Edge Counter ）。<br>这两个计数器都有一个确定的阈值，超过后便会触发 JIT 编译。</p>
+<h2 id="Arrays-sort"><a href="#Arrays-sort" class="headerlink" title="Arrays.sort()"></a>Arrays.sort()</h2><p>Java系统提供的Arrays.sort函数。对于基础类型，底层使用快速排序。对于非基础类型，底层使用归并排序。请问是为什么？<br>答：这是考虑到排序算法的稳定性。对于基础类型，相同值是无差别的，排序前后相同值的相对位置并不重要，所以选择更为高效的快速排序，尽管它是不稳定的排序算法；而对于非基础类型，排序前后相等实例的相对位置不宜改变，所以选择稳定的归并排序。</p>
 
       
 
@@ -314,6 +315,15 @@
 
   
 <nav id="article-nav">
+  
+    <a href="/2018/11/07/Python一：列表、元组和字符串/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          Python一：列表、元组和字符串
+        
+      </div>
+    </a>
   
   
     <a href="/2018/07/17/浅析InterruptedException/" id="article-nav-older" class="article-nav-link-wrap">
@@ -437,7 +447,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Android</a>
+                <a href="javascript:void(0)" class="js-tag color2">Python</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -450,6 +460,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Spring</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Android</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">面试</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -466,10 +484,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">前端</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">面试</a>
               </li>
             
             <div class="clearfix"></div>
